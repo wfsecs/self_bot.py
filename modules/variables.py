@@ -124,7 +124,7 @@ sex3 = '''[3][0;34m [Discord][0m
 [0;31m19.[0m[0;36m  dark [1;37m(Changes theme to dark)[0;35m,
 [0;31m20.[0m[0;36m  light [1;37m(Changes theme to light)[0;35m,
 [0;31m21.[0m[0;36m  firstmsg [1;37m(Finds the first message)[0;35m,
-[0;31m22.[0m[0;36m  embed [0;30m"message" [1;37m(Sends message om embed)[0;35m,
+[0;31m22.[0m[0;36m  embed [0;30m"message" [1;37m(Sends message in embeds)[0;35m,
 [0;31m23.[0m[0;36m  empty_spam [0;30m<amount> [1;37m(Spam empty messages)[0;35m,
 '''
 
