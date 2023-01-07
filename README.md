@@ -196,7 +196,9 @@ Pinghack never works on servers with high moderation.***
 
 **2. Replace "your-discord-token" with your [Discord Token](https://www.androidauthority.com/get-discord-token-3149920/)**
     
-**3. Replace "your-discord-id" with your [Discord ID](https://www.androidpolice.com/how-to-find-discord-id/)**
+**3. Replace "your-discord-password" with your Discord Password**
+    
+**4. Replace "your-discord-id" with your [Discord ID](https://www.androidpolice.com/how-to-find-discord-id/)**
     
 > **You can Enable/Disable Nitro Sniper, Selfbot Catcher, Keyword Stalker just by changing "true" to "false"**
     
