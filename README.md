@@ -191,16 +191,19 @@ Pinghack never works on servers with high moderation.***
 ***I must say that using selfbots is against Discord Terms Of Service blablablabla***
 
 # ***Usage:***
+    
+**1. Open config.**
+
+**2. Replace "your-discord-token" with your [Discord Token](https://www.androidauthority.com/get-discord-token-3149920/)**
+    
+**3. Replace "your-discord-id" with your [Discord ID](https://www.androidpolice.com/how-to-find-discord-id/)**
+    
+> **You can Enable/Disable Nitro Sniper, Selfbot Catcher, Keyword Stalker just by changing "true" to "false"**
+    
+> **To use Mention AI you must add your [OpenAI API Key](https://openai.com/api/)**
+    
+> **Logging webhook is where the bot logs events that are:**
 ```
-1. Open config.json
-2. Replace "your-discord-token" with your Discord Token
-3. Replace "your-discord-id" with your Discord ID
-    
-You can Enable/Disable Nitro Sniper, Selfbot Catcher, Keyword Stalker just by changing "true" to "false"
-    
-To use Mention AI you must add your OpenAI API Key
-    
-Logging webhook is where the bot logs events that are:
 Deleted Messages
 Messages with specific keywords
 And few others
