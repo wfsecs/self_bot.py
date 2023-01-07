@@ -160,7 +160,7 @@
 ```
 </details>
 
-### **Features that make this selfbot good:*
+### ***Features that make this selfbot good:***
 <details><summary>See features</summary>
     
 - [x] Nitro sniper
@@ -179,3 +179,13 @@
 - [ ] Backup loader
 - [ ] Token nuker
 - [ ] Publish
+    
+## Developer notes:
+***I recommend using Pinghack on small server with under 40 members
+Pinghack never works on servers with high moderation.***
+    
+***The command stealpfp can get your account locked for suspicious activity. To unlock it you must add your phonenumber to prevent it from happening in the future...***
+    
+***Remember to have common sense while using this selfbot. For example don't tell everyone that you are using a selfbot. Your account may get temporarily locked for suspicious activity.***
+
+***I must say that using selfbots is against Discord Terms Of Server blablablabla***
