@@ -189,6 +189,8 @@ Pinghack never works on servers with high moderation.***
 ***Remember to have common sense while using this selfbot. For example don't tell everyone that you are using a selfbot. Your account may get temporarily locked for suspicious activity.***
 
 ***I must say that using selfbots is against Discord Terms Of Service blablablabla***
+    
+**My Discord: wfsec#6530 (860090561682472980)**
 
 # ***Usage:***
     
