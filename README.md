@@ -159,3 +159,23 @@
 6.   vc_stop (Stops playing music),
 ```
 </details>
+
+### **Features that make this selfbot good:*
+<details><summary>See features</summary>
+    
+- [x] Nitro sniper
+- [x] Keyword sniper
+- [x] Mention AI
+- [x] Backup command
+- [x] 0 Permission raiding
+- [x] Nuking commands
+- [x] Group spammer and group locker
+- [x] Unique commands
+
+</details>
+    
+## **TODO:**
+- [ ] More networking commands
+- [ ] Backup loader
+- [ ] Token nuker
+- [ ] Publish
