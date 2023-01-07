@@ -205,6 +205,8 @@ Pinghack never works on servers with high moderation.***
 > **To use Mention AI you must add your [OpenAI API Key](https://openai.com/api/)**
     
 > **Logging webhook is where the bot logs events that are:**
+
+> **My Discord: wfsec#6530 (860090561682472980)**
 ```
 Deleted Messages
 Messages with specific keywords
