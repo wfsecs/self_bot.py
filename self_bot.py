@@ -1,4 +1,4 @@
-﻿from discord_webhook import DiscordWebhook
+from discord_webhook import DiscordWebhook
 from brainfuckery import Brainfuckery
 from discord.ext import commands
 from modules.functions import *
@@ -123,8 +123,7 @@ async def on_ready():
 # When command fails
 @bot.event
 async def on_command_error(ctx, arg):  # When command fails
-    print(
-        f'    {flyell}{ctx.message.author} | {flred}[ERROR]{frese} {ctx.message.content} {flmage}-> {flred}[{arg}]{frese}')
+    print(f'    {flyell}{ctx.message.author} | {flred}[ERROR]{frese} {ctx.message.content} {flmage}-> {flred}[{arg}]{frese}')
     try:
         trn = get_time()
         f.write(f'[{trn}] ERROR: {ctx.message.content} -> {arg}\n')
@@ -176,6 +175,34 @@ async def on_message_delete(message):
 # Nitro sniper, Selfbot-Catcher and Word Stalker
 @bot.listen()
 async def on_message(message):
+    if grouplock:
+        if message.channel.id == grouplock_group:
+
+            tempmembers = []
+            for item in gmembers:
+                tempmembers.append(item)
+
+            print(tempmembers)
+
+            t_members = requests.get(f"https://discord.com/api/v10/channels/{grouplock_group}",
+                                     headers={"authorization": token}).json()
+
+            for cmember in t_members['recipients']:
+                if cmember['id'] in tempmembers:
+                    tempmembers.remove(cmember['id'])
+
+            else:
+                for id in tempmembers:
+                    print(f'{id} is in {tempmembers}')
+
+                    url = f'https://discord.com/api/v10/channels/{grouplock_group}/recipients/{id}'
+                    r = requests.put(url, headers={"authorization": token})
+                    if r.status_code != 204:
+                        print(f'    {flyell}Grouplocker | {flred}[ERROR]{frese} Status code is not 204 but it is {r.status_code}')
+
+                    tempmembers.remove(id)
+
+
     msg = message.content
     code = ''
     status = ''
@@ -223,8 +250,6 @@ async def on_message(message):
                 if asker == f'<@{discord_id}>':
                     asker = f'{bot.user}'
 
-                await message.channel.trigger_typing()
-
                 # Generate a response
                 completion = openai.Completion.create(
                     engine=model_engine,
@@ -266,8 +291,7 @@ async def on_message(message):
                     f'    {flwhit}{message.guild} {flcyan}#{message.channel} {flyell}|{frese} Selfbot Catcher {flblue}[FOUND]{fyell} {message.author} {flyell}is probably using a selfbot.{frese} Reason: {fmage}"{flred}{x}{fmage}"{flyell} is in the message.{frese}')
                 try:
                     trn = get_time()
-                    log_event(webhook,
-                              f'[{trn}] SELFBOT-CATCHER: {message.author} is probably using a selfbot. Reason: "{x}" is in the message. \n --> {message.content[0:30]}')
+                    log_event(webhook, f'[{trn}] SELFBOT-CATCHER: {message.author} is probably using a selfbot. Reason: "{x}" is in the message. \n --> {message.content[0:30]}')
                     f.write(
                         f'[{trn}] SELFBOT-CATCHER: {message.author} is probably using a selfbot. Reason: "{x}" is in the message.\n')
 
@@ -294,8 +318,7 @@ async def on_message(message):
             return
         for word in keywords:
             if word in msg:
-                print(
-                    f'    {flblue}{message.guild} {flcyan}#{message.channel} {fyell}{message.author} {flyell}|{frese} Word Stalker {flblue}[FOUND]{fred} "{word}" {flyell}is in the message:{frese} {message.content[0:15]}...')
+                print(f'    {message.guild} {flcyan}#{message.channel} {fyell}{message.author} {flyell}|{frese} Word Stalker {flblue}[FOUND]{fred} "{word}" {flyell}is in the message:{frese} {message.content[0:15]}...')
                 try:
                     trn = get_time()
                     log_event(webhook,
@@ -304,20 +327,6 @@ async def on_message(message):
                         f'[{trn}] WORD-STALKER: {message.guild} {message.author} "{word}" is in the message: {message.content}\n')
                 except UnicodeEncodeError:
                     return
-
-    if grouplock:
-        t_members = requests.get(f"https://discord.com/api/v10/channels/{grouplock_group}",
-                                 headers={"authorization": token}).json()
-
-        try:
-            # Lock Leaves
-            for member in reslock['recipients']:
-                memberid = member['id']
-                if memberid not in t_members:
-                    requests.put(f"https://discord.com/api/v10/channels/{grouplock_group}/recipients/{memberid}",
-                                headers={"authorization": token})
-        except:
-            pass
 
 
 @bot.command()
@@ -1682,6 +1691,7 @@ async def grouplock(ctx, arg):
     if arg == "ON" or arg == "on":
         global grouplock_group
         global grouplock
+        global gmembers
         global reslock
 
         grouplock = True
@@ -1698,8 +1708,9 @@ async def grouplock(ctx, arg):
     elif arg == "OFF" or arg == "off":
         grouplock = False
         grouplock_group = 0
-
+        gmembers = []
         reslock = ''
+
         await ctx.send('**`Group is now unlocked`**')
 
     else:
