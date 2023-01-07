@@ -1,0 +1,11 @@
+discord.py-self
+discord-webhook
+brainfuckery
+youtube_dl
+morse-talk
+pypresence
+randfacts
+pyfiglet
+requests
+qrcode
+openai
