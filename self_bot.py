@@ -182,8 +182,6 @@ async def on_message(message):
             for item in gmembers:
                 tempmembers.append(item)
 
-            print(tempmembers)
-
             t_members = requests.get(f"https://discord.com/api/v10/channels/{grouplock_group}",
                                      headers={"authorization": token}).json()
 
@@ -193,7 +191,6 @@ async def on_message(message):
 
             else:
                 for id in tempmembers:
-                    print(f'{id} is in {tempmembers}')
 
                     url = f'https://discord.com/api/v10/channels/{grouplock_group}/recipients/{id}'
                     r = requests.put(url, headers={"authorization": token})
