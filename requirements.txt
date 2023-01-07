@@ -9,3 +9,4 @@ pyfiglet
 requests
 qrcode
 openai
+scapy
