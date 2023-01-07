@@ -178,7 +178,7 @@
 - [ ] More networking commands
 - [ ] Backup loader
 - [ ] Token nuker
-- [ ] Publish
+- [x] Publish
     
 ## Developer notes:
 ***I recommend using Pinghack on small server with under 40 members
