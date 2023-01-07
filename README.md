@@ -210,3 +210,5 @@ Deleted Messages
 Messages with specific keywords
 And few others
 ```
+
+> **To use VC-Commands you must download ffmpeg from https://ffmpeg.org/**
