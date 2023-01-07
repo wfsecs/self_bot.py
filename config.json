@@ -1,0 +1,16 @@
+{
+  "token": "your-discord-token",
+  "password": "your-discord-password",
+  "prefix": ",",
+  "discord-id": "your-discord-id",
+
+  "nitro-sniper": true,
+  "selfbot-catcher": true,
+  "word-stalker": true,
+  "mention-ai": false,
+
+  "keywords": ["token", "nitro", "selfbot", "bot", "ip", "hacked"],
+
+  "openai-api-key": "your-openai-api-key",
+  "logging-webhook": "discord-webhook-url-for-logging"
+}
