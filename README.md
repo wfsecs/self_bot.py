@@ -182,7 +182,10 @@
 - [x] Command aliases
 - [x] Option turn off webhook logger in config file
 - [ ] Token raiding
-- [x] Publish
+- [ ] Giveaway joiner
+- [ ] Account protections
+- [ ] Session Viewer
+- [ ] Autobumper
     
 ## Developer notes:
 ***I recommend using Pinghack on small server with under 40 members
