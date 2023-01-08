@@ -200,7 +200,6 @@ sex7 = '''[7][0;34m [Hacks][0m
 
 sex8 = '''[8][0;34m [Other][0m
 [0;31m1.[0m[0;36m   editg [0;30m"text (edited) test <- edited mark will be here" [1;37m(Edit glitch)[0;35m,
-[0;31m2.[0m[0;36m   limitbypass [0;30m<file> [1;37m(Allows you to go past 2000 char limit) [PATCHED][0;35m,
 [0;31m3.[0m[0;36m   kill [0;30m<user> <amount> [1;37m(Makes a webhook that bullies mentioned user)[0;35m,
 [0;31m4.[0m[0;36m   type [1;37m(Typing indicator everywhere)[0;35m,
 [0;31m5.[0m[0;36m   bsod [1;37m(Sends a link that causes BSOD on windows machines if interacted with)[0;35m,
