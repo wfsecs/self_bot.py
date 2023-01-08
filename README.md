@@ -178,6 +178,11 @@
 - [ ] More networking commands
 - [ ] Backup loader
 - [ ] Token nuker
+- [ ] Cleaner code
+- [ ] Useless commands
+- [ ] Command aliases
+- [ ] Option turn off webhook logger in config file
+- [ ] Token raiding
 - [x] Publish
     
 ## Developer notes:
