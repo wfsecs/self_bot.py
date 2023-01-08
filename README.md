@@ -186,6 +186,7 @@
 - [ ] Account protections
 - [ ] Session Viewer
 - [ ] Autobumper
+- [ ] Custom commands
     
 ## Developer notes:
 ***I recommend using Pinghack on small server with under 40 members
