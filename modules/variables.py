@@ -146,7 +146,6 @@ channel_names = ['general', 'info', 'gaming', 'media', 'suggestions',
                  'other', 'topic', 'off-topic', 'todo', 'reaction-roles',
                  'public', 'staff', 'questions', 'answers', 'bump', 'tickets', 'joins-leaves',
                  'audit-logs', 'moderator-only', 'nsfw', 'memes', 'hacking', 'coding']
-bump_command = '/bump '
 
 fblue = Fore.BLUE
 fred = Fore.RED
