@@ -1,4 +1,4 @@
-from discord_webhook import DiscordWebhook
+﻿from discord_webhook import DiscordWebhook
 from brainfuckery import Brainfuckery
 from modules.youtubeclass import *
 from discord.ext import commands
@@ -1529,22 +1529,7 @@ async def vc_leave(ctx):
         await ctx.send("*`I am not connected to a vc`*")
 
 
-@bot.command()  # leaves current vc
-async def annoy_vc(ctx, arg):
-    await ctx.message.delete()
-
-    channel_id = int(arg)
-    voice_channel = bot.get_channel(channel_id)
-
-    for _ in range(10):
-        await voice_channel.connect()
-        time.sleep(0.8)
-        voice_client = ctx.message.guild.voice_client
-        if voice_client.is_connected():
-            await voice_client.disconnect()
-
-
-@bot.command()  # Ping server roles trolololo
+@bot.command(aliases=['roleping', 'pingroles'])  # Ping server roles trolololo
 async def rolemention(ctx, arg):
     guild = ctx.message.guild
 
@@ -1565,7 +1550,7 @@ async def rolemention(ctx, arg):
             await ctx.send(ping)
 
 
-@bot.command()  # id ping
+@bot.command(aliases=['pingid'])  # id ping
 async def idping(ctx, arg):
     int(arg)
     str(arg)
@@ -1573,7 +1558,7 @@ async def idping(ctx, arg):
     await ctx.send(f'<@{arg}>')
 
 
-@bot.command()  # ping channel
+@bot.command(aliases=['pingchannel'])  # ping channel
 async def channelping(ctx, arg):
     int(arg)
     str(arg)
@@ -1581,7 +1566,7 @@ async def channelping(ctx, arg):
     await ctx.send(f'<#{arg}>')
 
 
-@bot.command()  # grouplock
+@bot.command(aliases=['locker', 'glock'])  # grouplock
 async def grouplock(ctx, arg):
     if arg == "ON" or arg == "on":
         global grouplock_group
@@ -1672,7 +1657,7 @@ async def mentionai(ctx, arg):
     await quickload('Save changes')
 
 
-@bot.command()  # clear console
+@bot.command(aliases=['clearcmd'])  # clear console
 async def quickload(ctx):
     os.system('cls' if os.name == 'nt' else 'clear')  # cls or clear depends on os
     print(ascii)
