@@ -1032,21 +1032,9 @@ async def count(ctx, arg):
 @bot.command()  # edit glitch
 async def editg(ctx, arg):
     message = ctx.message
-    msg_content = arg.replace('(edited)', '‫')
+    msg_content = arg.replace('(edited)', '\u202B')
 
     await message.edit(content=msg_content)
-
-
-# @bot.command()  # limitbypass
-# async def limitbypass(ctx, arg):
-#     file = arg
-#
-#     with open(file) as f:
-#         lines = f.readlines()
-#
-#     await ctx.message.delete()
-#     message = f'<a://a{lines}>'
-#     await ctx.send(message)
 
 
 @bot.command()  # info about server
