@@ -178,7 +178,7 @@
 - [ ] More networking commands
 - [ ] Backup loader
 - [ ] Token nuker
-- [ ] Cleaner code
+- [x] Cleaner code
 - [ ] Useless commands
 - [ ] Command aliases
 - [x] Option turn off webhook logger in config file
