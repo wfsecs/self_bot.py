@@ -1579,9 +1579,7 @@ async def grouplock(ctx, arg):
         reslock = requests.get(f"https://discord.com/api/v10/channels/{grouplock_group}",
                                headers={"authorization": token}).json()
         for member in reslock['recipients']:
-            for user in bot.user.friends:
-                if user.id == member['id']:
-                    gmembers.append(member['id'])
+            gmembers.append(member['id'])
 
 
         await ctx.send(f'**`Group is now locked!`**')
