@@ -1,4 +1,4 @@
-﻿from discord_webhook import DiscordWebhook
+from discord_webhook import DiscordWebhook
 from brainfuckery import Brainfuckery
 from modules.youtubeclass import *
 from discord.ext import commands
@@ -110,12 +110,10 @@ async def on_message(message):
 
             else:
                 for id in tempmembers:
-
                     url = f'https://discord.com/api/v10/channels/{grouplock_group}/recipients/{id}'
                     r = requests.put(url, headers={"authorization": token})
                     if r.status_code != 204:
-                        print(
-                            f'    {flyell}Grouplocker | {flred}[ERROR]{frese} Status code is not 204 but it is {r.status_code}')
+                        print(f'    {flyell}Grouplocker | {flred}[ERROR]{frese} Status code is not 204 but it is {r.status_code}')
 
                     tempmembers.remove(id)
 
@@ -1581,7 +1579,10 @@ async def grouplock(ctx, arg):
         reslock = requests.get(f"https://discord.com/api/v10/channels/{grouplock_group}",
                                headers={"authorization": token}).json()
         for member in reslock['recipients']:
-            gmembers.append(member['id'])
+            for user in bot.user.friends:
+                if user.id == member['id']:
+                    gmembers.append(member['id'])
+
 
         await ctx.send(f'**`Group is now locked!`**')
 
