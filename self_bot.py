@@ -1624,7 +1624,7 @@ async def nitrosniper(ctx, arg):
         nitro_sniper = True
         sniper_status = 'Active'
 
-    await quickload()
+    await quickload('Save changes')
 
 
 @bot.command()  # Selfbot catcher on/off
@@ -1639,7 +1639,7 @@ async def selfbotcatcher(ctx, arg):
         selfbot_catcher = True
         catcher_status = 'Active'
 
-    await quickload()
+    await quickload('Save changes')
 
 
 @bot.command()  # Wordstalker on/off
@@ -1654,7 +1654,7 @@ async def wordstalker(ctx, arg):
         word_stalker = True
         stalker_status = 'Active'
 
-    await quickload()
+    await quickload('Save changes')
 
 
 @bot.command()  # Selfbot catcher on/off
@@ -1669,7 +1669,7 @@ async def mentionai(ctx, arg):
         mention_ai = True
         ai_status = 'Active'
 
-    await quickload()
+    await quickload('Save changes')
 
 
 @bot.command()  # clear console
