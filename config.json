@@ -12,5 +12,7 @@
   "keywords": ["token", "nitro", "selfbot", "bot", "ip", "hacked"],
 
   "openai-api-key": "your-openai-api-key",
-  "logging-webhook": "discord-webhook-url-for-logging"
+  
+  "webhook-logger": false,
+  "logging-webhook": "webhook-url-here"
 }
