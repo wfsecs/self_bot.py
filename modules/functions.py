@@ -138,14 +138,15 @@ def log_filename():
 
 
 def log_event(webhook, info):
-    try:
-        embed = dwh.DiscordEmbed(color=0xf53d3d)
-        embed.set_author(name='Made by wfsec',
-                         icon_url='https://cdn.discordapp.com/attachments/1050426327683055616/1050432369062072352/loglo.png')
-        embed.add_embed_field(name="***Command ran / Event***", value=f'```{info}```')
-        embed.set_footer(text="self_bot")
+    if webhooklogger:
+        try:
+            embed = dwh.DiscordEmbed(color=0xf53d3d)
+            embed.set_author(name='Made by wfsec',
+                             icon_url='https://cdn.discordapp.com/attachments/1050426327683055616/1050432369062072352/loglo.png')
+            embed.add_embed_field(name="***Command ran / Event***", value=f'```{info}```')
+            embed.set_footer(text="self_bot")
 
-        webhook.add_embed(embed)
-        dwhr = webhook.execute(remove_embeds=True)
-    except:
-        print('    [WEBHOOK-LOGGER] Failed to log!')
+            webhook.add_embed(embed)
+            dwhr = webhook.execute(remove_embeds=True)
+        except:
+            print('    [WEBHOOK-LOGGER] Failed to log!')
