@@ -14,7 +14,6 @@ def iplookup_func(arg):
     c = a['connection']
     t = a['timezone']
 
-
     ip_info = f'''```ansi
 [1;37m+---------------------------------------+    
 
@@ -150,3 +149,49 @@ def log_event(webhook, info):
             dwhr = webhook.execute(remove_embeds=True)
         except:
             print('    [WEBHOOK-LOGGER] Failed to log!')
+
+
+# Write to log file
+log_file = log_filename()
+f = open(log_file, 'a+')
+f.write('''     selfbot | Made by wfsec#6530\n+------------------=[BOT LOGS]=------------------+\n
+''')
+
+# Get config.json
+with open("config.json", "r") as jsonfile:
+    cfg = json.load(jsonfile)
+
+    token = cfg['token']
+    prefix = cfg['prefix']
+    password = cfg['password']
+
+    nitro_sniper = cfg['nitro-sniper']
+    selfbot_catcher = cfg['selfbot-catcher']
+    word_stalker = cfg['word-stalker']
+    mention_ai = cfg['mention-ai']
+    openai_key = cfg['openai-api-key']
+    discord_id = cfg['discord-id']
+    keywords = cfg['keywords']
+
+    webhooklogger = cfg['webhook-logger']
+    webhook = dwh.DiscordWebhook(url=cfg['logging-webhook'])
+
+    if nitro_sniper:
+        sniper_status = f'Active'
+    else:
+        sniper_status = f'Disabled'
+    if mention_ai:
+        ai_status = f'Active'
+    else:
+        ai_status = f'Disabled'
+    if selfbot_catcher:
+        catcher_status = f'Active'
+    else:
+        catcher_status = f'Disabled'
+    if word_stalker:
+        stalker_status = f'Active'
+    else:
+        stalker_status = f'Disabled'
+
+    trn = get_time()
+    f.write(f'[{trn}] LOADED:\nNitro Sniper: {sniper_status}\nSelfbot Catcher: {catcher_status}\nWord Stalker: {stalker_status}\nMention AI: {ai_status}\n')
