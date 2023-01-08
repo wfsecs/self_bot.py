@@ -1,16 +1,15 @@
-from discord_webhook import DiscordWebhook
+﻿from discord_webhook import DiscordWebhook
 from brainfuckery import Brainfuckery
+from modules.youtubeclass import *
 from discord.ext import commands
 from modules.functions import *
 from modules.variables import *
 import morse_talk as mtalk
 from textwrap import wrap
-import youtube_dl
 import randfacts
 import requests
 import pyfiglet
 import discord
-import asyncio
 import random
 import string
 import base64
@@ -21,92 +20,11 @@ import time
 import json
 import os
 
-ytdl_format_options = {
-    'format': 'bestaudio/best',
-    'restrictfilenames': True,
-    'noplaylist': True,
-    'nocheckcertificate': True,
-    'ignoreerrors': False,
-    'logtostderr': False,
-    'quiet': True,
-    'no_warnings': True,
-    'default_search': 'auto',
-    'source_address': '0.0.0.0',  # bind to ipv4 since ipv6 addresses cause issues sometimes
-    'outtmpl': './music/%(title)s.%(ext)s'
-}
-ffmpeg_options = {
-    'options': '-vn'
-}
-ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
-
-
-class YTDLSource(discord.PCMVolumeTransformer):
-    def __init__(self, source, *, data, volume=0.5):
-        super().__init__(source, volume)
-        self.data = data
-        self.title = data.get('title')
-        self.url = ""
-
-    @classmethod
-    async def from_url(cls, url, *, loop=None, stream=False):
-        loop = loop or asyncio.get_event_loop()
-        data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=not stream))
-        if 'entries' in data:
-            # take first item from a playlist
-            data = data['entries'][0]
-        filename = data['title'] if stream else ytdl.prepare_filename(data)
-        return filename
-
-
-log_file = log_filename()
-f = open(log_file, 'a+')
-f.write('''     selfbot | Made by wfsec#6530\n+------------------=[BOT LOGS]=------------------+\n
-''')
-
-# Get config.json
-with open("config.json", "r") as jsonfile:
-    cfg = json.load(jsonfile)
-
-    token = cfg['token']
-    prefix = cfg['prefix']
-    password = cfg['password']
-
-    nitro_sniper = cfg['nitro-sniper']
-    selfbot_catcher = cfg['selfbot-catcher']
-    word_stalker = cfg['word-stalker']
-    mention_ai = cfg['mention-ai']
-    openai_key = cfg['openai-api-key']
-    discord_id = cfg['discord-id']
-    keywords = cfg['keywords']
-
-    webhooklogger = cfg['webhook-logger']
-    webhook = dwh.DiscordWebhook(url=cfg['logging-webhook'])
-
-    if nitro_sniper:
-        sniper_status = f'Active'
-    else:
-        sniper_status = f'Disabled'
-    if mention_ai:
-        ai_status = f'Active'
-    else:
-        ai_status = f'Disabled'
-    if selfbot_catcher:
-        catcher_status = f'Active'
-    else:
-        catcher_status = f'Disabled'
-    if word_stalker:
-        stalker_status = f'Active'
-    else:
-        stalker_status = f'Disabled'
-
-    trn = get_time()
-    f.write(
-        f'[{trn}] LOADED:\nNitro Sniper: {sniper_status}\nSelfbot Catcher: {catcher_status}\nWord Stalker: {stalker_status}\n\n')
-
 # Bot stuff
 bot = commands.Bot(command_prefix=prefix, self_bot=True, help_command=None)
 
 
+# When bot is loaded
 @bot.event
 async def on_ready():
     os.system('cls' if os.name == 'nt' else 'clear')  # cls or clear depends on os
@@ -196,10 +114,10 @@ async def on_message(message):
                     url = f'https://discord.com/api/v10/channels/{grouplock_group}/recipients/{id}'
                     r = requests.put(url, headers={"authorization": token})
                     if r.status_code != 204:
-                        print(f'    {flyell}Grouplocker | {flred}[ERROR]{frese} Status code is not 204 but it is {r.status_code}')
+                        print(
+                            f'    {flyell}Grouplocker | {flred}[ERROR]{frese} Status code is not 204 but it is {r.status_code}')
 
                     tempmembers.remove(id)
-
 
     msg = message.content
     code = ''
@@ -285,13 +203,11 @@ async def on_message(message):
 
         for x in prefixes:
             if msg.startswith(x):
-                print(
-                    f'    {flwhit}{message.guild} {flcyan}#{message.channel} {flyell}|{frese} Selfbot Catcher {flblue}[FOUND]{fyell} {message.author} {flyell}is probably using a selfbot.{frese} Reason: {fmage}"{flred}{x}{fmage}"{flyell} is in the message.{frese}')
+                print(f'    {flwhit}{message.guild} {flcyan}#{message.channel} {flyell}|{frese} Selfbot Catcher {flblue}[FOUND]{fyell} {message.author} {flyell}is probably using a selfbot.{frese} Reason: {fmage}"{flred}{x}{fmage}"{flyell} is in the message.{frese}')
                 try:
                     trn = get_time()
-                    log_event(webhook, f'[{trn}] SELFBOT-CATCHER: {message.author} is probably using a selfbot. Reason: "{x}" is in the message. \n --> {message.content[0:30]}')
-                    f.write(
-                        f'[{trn}] SELFBOT-CATCHER: {message.author} is probably using a selfbot. Reason: "{x}" is in the message.\n')
+                    log_event(webhook,f'[{trn}] SELFBOT-CATCHER: {message.author} is probably using a selfbot. Reason: "{x}" is in the message. \n --> {message.content[0:30]}')
+                    f.write(f'[{trn}] SELFBOT-CATCHER: {message.author} is probably using a selfbot. Reason: "{x}" is in the message.\n')
 
                 except UnicodeEncodeError:
                     return
@@ -300,14 +216,11 @@ async def on_message(message):
             if message.author.bot:
                 return
             else:
-                print(
-                    f'    {flwhit}{message.guild} {flcyan}#{message.channel} {flyell}|{frese} Selfbot Catcher {flblue}[FOUND]{fyell} {message.author} {flyell}is using a selfbot.{frese} Reason: {fred}Message is an embed.{frese}')
+                print(f'    {flwhit}{message.guild} {flcyan}#{message.channel} {flyell}|{frese} Selfbot Catcher {flblue}[FOUND]{fyell} {message.author} {flyell}is using a selfbot.{frese} Reason: {fred}Message is an embed.{frese}')
                 try:
                     trn = get_time()
-                    log_event(webhook,
-                              f'[{trn}] SELFBOT-CATCHER: {message.author} is using a selfbot. Reason: Message is an embed.')
-                    f.write(
-                        f'[{trn}] SELFBOT-CATCHER: {message.author} is using a selfbot. Reason: Message is an embed.\n')
+                    log_event(webhook,f'[{trn}] SELFBOT-CATCHER: {message.author} is using a selfbot. Reason: Message is an embed.')
+                    f.write(f'[{trn}] SELFBOT-CATCHER: {message.author} is using a selfbot. Reason: Message is an embed.\n')
                 except UnicodeEncodeError:
                     return
 
@@ -319,10 +232,8 @@ async def on_message(message):
                 print(f'    {message.guild} {flcyan}#{message.channel} {fyell}{message.author} {flyell}|{frese} Word Stalker {flblue}[FOUND]{fred} "{word}" {flyell}is in the message:{frese} {message.content[0:15]}...')
                 try:
                     trn = get_time()
-                    log_event(webhook,
-                              f'[{trn}] WORD-STALKER: {message.guild} {message.author} "{word}" is in the message: {message.content}')
-                    f.write(
-                        f'[{trn}] WORD-STALKER: {message.guild} {message.author} "{word}" is in the message: {message.content}\n')
+                    log_event(webhook,f'[{trn}] WORD-STALKER: {message.guild} {message.author} "{word}" is in the message: {message.content}')
+                    f.write(f'[{trn}] WORD-STALKER: {message.guild} {message.author} "{word}" is in the message: {message.content}\n')
                 except UnicodeEncodeError:
                     return
 
@@ -1697,7 +1608,7 @@ async def grouplock(ctx, arg):
         grouplock_group = ctx.channel.id
 
         reslock = requests.get(f"https://discord.com/api/v10/channels/{grouplock_group}",
-                           headers={"authorization": token}).json()
+                               headers={"authorization": token}).json()
         for member in reslock['recipients']:
             gmembers.append(member['id'])
 
