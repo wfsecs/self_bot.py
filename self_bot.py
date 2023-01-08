@@ -60,7 +60,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
 
 log_file = log_filename()
 f = open(log_file, 'a+')
-f.write('''     selfbot | Made by wfsec#0001\n+------------------=[BOT LOGS]=------------------+\n
+f.write('''     selfbot | Made by wfsec#6530\n+------------------=[BOT LOGS]=------------------+\n
 ''')
 
 # Get config.json
@@ -79,6 +79,7 @@ with open("config.json", "r") as jsonfile:
     discord_id = cfg['discord-id']
     keywords = cfg['keywords']
 
+    webhooklogger = cfg['webhook-logger']
     webhook = dwh.DiscordWebhook(url=cfg['logging-webhook'])
 
     if nitro_sniper:
