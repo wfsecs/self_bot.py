@@ -181,7 +181,7 @@
 - [ ] Cleaner code
 - [ ] Useless commands
 - [ ] Command aliases
-- [ ] Option turn off webhook logger in config file
+- [x] Option turn off webhook logger in config file
 - [ ] Token raiding
 - [x] Publish
     
