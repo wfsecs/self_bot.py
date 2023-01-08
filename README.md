@@ -1,7 +1,7 @@
 # self_bot.py
 ## Discord selfbot made for many purposes.
 
-**self_bot offers 103 commands and 9 categories:**
+**self_bot offers 102 commands and 9 categories:**
 
 ```
 > Basic
@@ -143,10 +143,9 @@
 ```
     [8] [Other]
 1.   editg "text (edited) test <- edited mark will be here" (Edit glitch),
-2.   limitbypass <file> (Allows you to go past 2000 char limit) [PATCHED],
-3.   kill <user> <amount> (Makes a webhook that bullies mentioned user),
-4.   type (Typing indicator everywhere),
-5.   bsod (Sends a link that causes BSOD on windows machines if interacted with),
+2.   kill <user> <amount> (Makes a webhook that bullies mentioned user),
+3.   type (Typing indicator everywhere),
+4.   bsod (Sends a link that causes BSOD on windows machines if interacted with),
 ```
 
 ```
