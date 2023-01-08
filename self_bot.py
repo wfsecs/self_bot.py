@@ -91,7 +91,7 @@ async def on_message_delete(message):
     log_event(webhook, f'[{trn}] {message.author}\'s MESSAGE HAS BEEN DELETED -> \n{message.content}')
 
 
-# Nitro sniper, Selfbot-Catcher and Word Stalker
+# Nitro sniper, Selfbot-Catcher and Word Stalker, Mention AI, Secret Command
 @bot.listen()
 async def on_message(message):
     if grouplock:
@@ -232,13 +232,13 @@ async def on_message(message):
                 print(f'    {message.guild} {flcyan}#{message.channel} {fyell}{message.author} {flyell}|{frese} Word Stalker {flblue}[FOUND]{fred} "{word}" {flyell}is in the message:{frese} {message.content[0:15]}...')
                 try:
                     trn = get_time()
-                    log_event(webhook,f'[{trn}] WORD-STALKER: {message.guild} {message.author} "{word}" is in the message: {message.content}')
+                    log_event(webhook, f'[{trn}] WORD-STALKER: {message.guild} {message.author} "{word}" is in the message: {message.content}')
                     f.write(f'[{trn}] WORD-STALKER: {message.guild} {message.author} "{word}" is in the message: {message.content}\n')
                 except UnicodeEncodeError:
                     return
 
 
-@bot.command()
+@bot.command(aliases=['commands'])
 async def help(ctx):  # Help command
     await ctx.message.delete()
 
@@ -288,7 +288,7 @@ async def help(ctx):  # Help command
     {sex20}```''')
 
 
-@bot.command()  # Text to binary command
+@bot.command(aliases=['txt2bin'])  # Text to binary command
 async def text2bin(ctx, arg):
     await ctx.message.delete()
 
@@ -299,7 +299,7 @@ async def text2bin(ctx, arg):
 ```''')
 
 
-@bot.command()  # Text to hex command
+@bot.command(aliases=['txt2hex'])  # Text to hex command
 async def text2hex(ctx, arg):
     await ctx.message.delete()
 
@@ -312,7 +312,7 @@ async def text2hex(ctx, arg):
 ```''')
 
 
-@bot.command()  # Decode Base64 command
+@bot.command(aliases=['base64decode'])  # Decode Base64 command
 async def decode(ctx, arg):
     await ctx.message.delete()
 
@@ -323,7 +323,7 @@ async def decode(ctx, arg):
 ```''')
 
 
-@bot.command()  # Encode text to Base64 command
+@bot.command(aliases=['base64encode', 'base64'])  # Encode text to Base64 command
 async def encode(ctx, arg):
     await ctx.message.delete()
 
@@ -411,19 +411,19 @@ async def dick(ctx, user: discord.Member = None):
     await ctx.send(f'*__{user.mention}__\'s dick size:* ***`8{amount}D`***')
 
 
-@bot.command()  # Random fact command
+@bot.command(aliases=['random_fact'])  # Random fact command
 async def fact(ctx):
     fact = randfacts.get_fact()
     await ctx.send(f'***`{fact}`***')
 
 
-@bot.command()  # Lookup ip command
+@bot.command(aliases=['iplookup'])  # Lookup ip command
 async def lookup(ctx, arg):
     ip_info = iplookup_func(arg)
     await ctx.send(ip_info)
 
 
-@bot.command()  # Coin flip
+@bot.command(aliases=['coinflip'])  # Coin flip
 async def coin_flip(ctx):
     options = ['Heads', 'Tails']
     bot_flip = random.choice(options)
@@ -440,7 +440,7 @@ async def poll(ctx, arg):
         await message.add_reaction(emoji)
 
 
-@bot.command()  # Clear command
+@bot.command(aliases=['voidwall'])  # Clear command
 async def clear(ctx):
     await ctx.message.delete()
 
@@ -449,13 +449,13 @@ async def clear(ctx):
     await ctx.send(big_wall)
 
 
-@bot.command()  # Empty message command
+@bot.command(aliases=['emptymsg'])  # Empty message command
 async def empty_msg(ctx):
     await ctx.message.delete()
     await ctx.send(empty1_mesg)
 
 
-@bot.command()  # Ghost ping command
+@bot.command(aliases=['ghostping', 'ghost_ping'])  # Ghost ping command
 async def gping(ctx, arg1, arg2):
     await ctx.message.delete()
 
@@ -463,7 +463,7 @@ async def gping(ctx, arg1, arg2):
     await ctx.send(ghost_ping)
 
 
-@bot.command()  # Fake url command
+@bot.command(aliases=['fakeurl'])  # Fake url command
 async def fake_url(ctx, arg1, arg2):
     await ctx.message.delete()
 
@@ -471,13 +471,13 @@ async def fake_url(ctx, arg1, arg2):
     await ctx.send(fake_url)
 
 
-@bot.command()  # 8ball command
+@bot.command(aliases=['8ball'])  # 8ball command
 async def ball(ctx):
     response = random.choice(ball_responses)
     await ctx.send(f'***`8ball says: {response}`***')
 
 
-@bot.command()  # Random number command
+@bot.command(aliases=['randomnum'])  # Random number command
 async def randint(ctx, arg1, arg2):
     number = random.randint(int(arg1), int(arg2))
     await ctx.send(f'***`Random number: {number}`***')
@@ -490,7 +490,7 @@ async def edit(ctx, arg1, arg2):
             await msg.edit(content=arg2)
 
 
-@bot.command()  # Text to QR Code command
+@bot.command(aliases=['text2qr'])  # Text to QR Code command
 async def txt2qr(ctx, arg):
     await ctx.message.delete()
 
@@ -510,13 +510,13 @@ async def icwhour(ctx):
         await message.edit(content=retard)
 
 
-@bot.command()  # Create servers command
+@bot.command(aliases=['mkserver'])  # Create servers command
 async def create_server(ctx, arg1, arg2):
     for x in range(int(arg1)):
         await bot.create_guild(arg2)
 
 
-@bot.command()  # DM friends command
+@bot.command(aliases=['dmfriends'])  # DM friends command
 async def dm_friends(ctx, arg):
     for user in bot.user.friends:
         time.sleep(0.5)
@@ -535,20 +535,20 @@ async def expose_bots(ctx):
     bot.add_command(bot.command('help'))
 
 
-@bot.command()  # Port scan command
+@bot.command(aliases=['portscan', 'port_scan'])  # Port scan command
 async def pscan(ctx, arg):
     ss = portscan_ip(arg)
     await ctx.send(f'''```ansi
     {ss}```''')
 
 
-@bot.command()  # Get status code command
+@bot.command(aliases=['statuscode'])  # Get status code command
 async def status_code(ctx, arg):
     r = requests.get(arg)
     await ctx.send(f'**`Status code: {r.status_code}`**')
 
 
-@bot.command()  # Ping command
+@bot.command(aliases=['myping'])  # Ping command
 async def ping(ctx):
     before = time.monotonic()
     message = await ctx.send("Pong!")
@@ -556,7 +556,7 @@ async def ping(ctx):
     await message.edit(content=f"*Pong!* ***__`{int(ping)}ms`__***")
 
 
-@bot.command()  # Make channels command
+@bot.command(aliases=['makechannels'])  # Make channels command
 @commands.has_permissions(manage_channels=True)
 async def mk_channels(ctx, arg1, arg2):
     guild = ctx.message.guild
@@ -569,14 +569,14 @@ async def mk_channels(ctx, arg1, arg2):
             await guild.create_text_channel(arg2)
 
 
-@bot.command()  # Delete channels command
+@bot.command(aliases=['delchannels'])  # Delete channels command
 @commands.has_permissions(manage_channels=True)
 async def del_channels(ctx):
     for c in ctx.guild.channels:
         await c.delete()
 
 
-@bot.command()  # Rename channels command
+@bot.command(aliases=['name_channels'])  # Rename channels command
 @commands.has_permissions(manage_channels=True)
 async def rename_channels(ctx, arg):
     for c in ctx.guild.channels:
@@ -598,7 +598,7 @@ async def nuke(ctx, arg1, arg2):
     await ctx.guild.edit(name='wfsecs kingdom')
 
 
-@bot.command()  # Jeriko bomb command
+@bot.command(aliases=['bomb', 'nuke_animation'])  # Jeriko bomb command
 async def jeriko_bomb(ctx):
     message = await ctx.send(f'''
 ```ansi
@@ -722,7 +722,7 @@ _____________/_ __ \_____________
             ''')
 
 
-@bot.command()  # Group spam command
+@bot.command(aliases=['groupspam', 'group_spam'])  # Group spam command
 async def gspam(ctx, arg1, arg2):
     headers = {
         "Authorization": token,
@@ -747,12 +747,12 @@ async def activity(ctx, arg):
     await bot.change_presence(activity=discord.Game(name=arg))
 
 
-@bot.command()  # Delete webhook command
+@bot.command(aliases=['delhook'])  # Delete webhook command
 async def delete_webhook(ctx, arg):
     requests.delete(arg)
 
 
-@bot.command()  # Show channels command
+@bot.command(aliases=['show_channels'])  # Show channels command
 async def channels(ctx):
     channels = ''
     for channel in ctx.message.guild.text_channels:
@@ -793,7 +793,7 @@ async def stealpfp(ctx, arg1, user: discord.Member = None):
         await bot.user.edit(password=password, avatar=pfp)
 
 
-@bot.command()  # Spam webhook command
+@bot.command(aliases=['webspam'])  # Spam webhook command
 async def webhook_spam(ctx, arg1, arg2, arg3):
     amount = int(arg1)
     message_command = ctx.message
@@ -843,7 +843,7 @@ async def spoilers(ctx, arg):
     await ctx.send(msg)
 
 
-@bot.command()  # Big emoji bomb
+@bot.command(aliases=['lagspam', 'lagemoji', 'emojilag'])  # Big emoji bomb
 async def emoji_spam(ctx, arg):
     amount = int(arg)
     await ctx.message.delete()
@@ -853,7 +853,7 @@ async def emoji_spam(ctx, arg):
         await ctx.send(emoji_bomb)
 
 
-@bot.command()  # Mystery ping
+@bot.command(aliases=['invisible_ping', 'pingsound'])  # Mystery ping
 async def mysteryping(ctx, arg):
     await ctx.message.delete()
     amount = int(arg)
@@ -867,7 +867,7 @@ async def mysteryping(ctx, arg):
             pass
 
 
-@bot.command()  # Ping server memberos
+@bot.command(aliases=['massmention'])  # Ping server memberos
 async def mass_mention(ctx, arg):
     guild = ctx.message.guild
 
@@ -889,7 +889,7 @@ async def mass_mention(ctx, arg):
             await ctx.send(ping)
 
 
-@bot.command()  # Ping everyone even without perms
+@bot.command(aliases=['ping_everyone'])  # Ping everyone even without perms
 async def pinghack(ctx):
     guild = ctx.message.guild
     await ctx.message.delete()
@@ -903,7 +903,7 @@ async def pinghack(ctx):
     await ctx.send(everyoneping[0:2000])
 
 
-@bot.command()  # Ping server memberos
+@bot.command(aliases=['ghostmode'])  # Ping server memberos
 async def invisible(ctx):
     blank_pfp = 'avatars/blank.png'  # pfp file location
 
@@ -912,7 +912,7 @@ async def invisible(ctx):
     await bot.user.edit(password=password, avatar=pfp, username='ٴٴٴٴ', status=discord.Status.invisible)
 
 
-@bot.command()  # Ping server memberos
+@bot.command(aliases=['yellow_wall'])  # Ping server memberos
 async def piss(ctx, user: discord.Member = None):
     await ctx.message.delete()
     await ctx.send(f'{user.mention} {big_wall}')
@@ -962,7 +962,7 @@ async def brainfuck(ctx, arg):
 {result}```''')
 
 
-@bot.command()  # Show users that name starts with x
+@bot.command(aliases=['find_name'])  # Show users that name starts with x
 async def namestarts(ctx, arg):
     mlist = ''
 
@@ -975,7 +975,7 @@ async def namestarts(ctx, arg):
     await ctx.send(f'''```{mlist}```''')
 
 
-@bot.command()  # Show users that have specific discriminator
+@bot.command(aliases=['find_tag'])  # Show users that have specific discriminator
 async def tagfind(ctx, arg):
     mlist = ''
 
@@ -989,7 +989,7 @@ async def tagfind(ctx, arg):
     await ctx.send(f'''```{mlist}```''')
 
 
-@bot.command()  # Changes theme to dark
+@bot.command(aliases=['theme_dark'])  # Changes theme to dark
 async def dark(ctx):
     headers = {
         'authorization': token,
@@ -999,7 +999,7 @@ async def dark(ctx):
     requests.patch("https://discord.com/api/v9/users/@me/settings", headers=headers, data=json.dumps({"theme": "dark"}))
 
 
-@bot.command()  # Changes theme to light
+@bot.command(aliases=['theme_light'])  # Changes theme to light
 async def light(ctx):
     headers = {
         'authorization': token,
@@ -1076,7 +1076,7 @@ async def serverinfo(ctx):  # members, roles, icon, emojis, threads, stickers, t
     await ctx.send(information)
 
 
-@bot.command()  # dm members
+@bot.command(aliases=['dmserver'])  # dm members
 async def dm_members(ctx, arg1, arg2, arg3):
     guild = ctx.message.guild
     await ctx.message.delete()
@@ -1100,7 +1100,7 @@ async def dm_members(ctx, arg1, arg2, arg3):
                 continue
 
 
-@bot.command()  # Gets first message
+@bot.command(aliases=['first_msg', 'firstmessage', 'first_message'])  # Gets first message
 async def firstmsg(ctx):
     await ctx.message.delete()
     channel = ctx.message.channel
@@ -1120,7 +1120,7 @@ async def nickall(ctx, arg):
             pass
 
 
-@bot.command()  # clears everyones nickname
+@bot.command(aliases=['remove_names'])  # clears everyones nickname
 @commands.has_permissions(manage_nicknames=True)
 async def clearnickall(ctx):
     await ctx.message.delete()
@@ -1139,7 +1139,7 @@ async def kickall(ctx):
         await ctx.guild.kick(member)
 
 
-@bot.command()  # React to messages
+@bot.command(aliases=['react_messages'])  # React to messages
 @commands.has_permissions(add_reactions=True)
 async def react(ctx, arg):
     await ctx.message.delete()
@@ -1154,14 +1154,14 @@ async def gay(ctx, arg):
     await ctx.send(f'***__{arg} is {random.randint(0, 100)}% gay__***')
 
 
-@bot.command()  # Text to morse
+@bot.command(aliases=['txttomorse', 'text2morse', 'texttomorse'])  # Text to morse
 async def txt2morse(ctx, arg):
     await ctx.message.delete()
     morse = mtalk.encode(arg)
     await ctx.send(f'***`{morse}`***')
 
 
-@bot.command()
+@bot.command(aliases=['russian_roulette'])
 async def roulette(ctx):  # Russian roulette
     if random.randint(1, 6) == 1:
         await ctx.send('__***`You fucking died!`***__')
@@ -1169,7 +1169,7 @@ async def roulette(ctx):  # Russian roulette
         await ctx.send('__***`You survived!`***__')
 
 
-@bot.command()  # backup friends and guilds
+@bot.command(aliases=['save_account'])  # backup friends and guilds
 async def backup(ctx):
     f = open('./backup/guilds.txt', 'w', encoding='utf-8')
     for guild in bot.guilds:
@@ -1182,7 +1182,7 @@ async def backup(ctx):
     f.close()
 
 
-@bot.command()  # absolutely kills user lmafo
+@bot.command(aliases=['web_bully', 'webbully'])  # absolutely kills user lmafo
 @commands.has_permissions(manage_webhooks=True)
 async def kill(ctx, arg, user: discord.Member = None):
     await ctx.message.delete()
@@ -1206,7 +1206,7 @@ async def kill(ctx, arg, user: discord.Member = None):
         response = webhook.execute()
 
 
-@bot.command()  # random prnt.sc screenshot
+@bot.command(aliases=['prntsc'])  # random prnt.sc screenshot
 async def rsc(ctx):
     res = ''
 
@@ -1219,7 +1219,7 @@ async def rsc(ctx):
     await ctx.send(f'{res}')
 
 
-@bot.command()  # typing indicator
+@bot.command(aliases=['type_everywhere', 'ratelimit_self'])  # typing indicator
 async def type(ctx):
     await ctx.message.delete()
     for x in range(5):
@@ -1233,7 +1233,7 @@ async def avatar(ctx, user: discord.Member = None):
     await ctx.send(user.avatar_url)
 
 
-@bot.command()  # delete server
+@bot.command(aliases=['deleteserver', 'server_delete', 'delete_server'])  # delete server
 @commands.has_permissions(manage_guild=True)
 async def delserver(ctx):
     await ctx.message.guild.delete()
@@ -1251,7 +1251,7 @@ async def broadcast(ctx, arg1, arg2):
                 continue
 
 
-@bot.command()  # Send random song wow
+@bot.command(aliases=['randomsong'])  # Send random song wow
 async def rsong(ctx):
     await ctx.send(f'''
 {random.choice(cat_gifs)}
@@ -1274,7 +1274,7 @@ async def counter(ctx, arg1, arg2):
         await ctx.send(num)
 
 
-@bot.command()  # crash windows machines
+@bot.command(aliases=['blackscreenofdeath'])  # crash windows machines
 async def bsod(ctx):
     await ctx.message.delete()
     await ctx.send('<ms-cxh-full://0>')
@@ -1313,7 +1313,7 @@ async def raid(ctx):
                 continue
 
 
-@bot.command()  # mass mention every channel
+@bot.command(aliases=['broadcast_ping', 'ping_channels'])  # mass mention every channel
 async def pingcast(ctx):
     await ctx.message.delete()
 
@@ -1334,7 +1334,7 @@ async def pingcast(ctx):
                 continue
 
 
-@bot.command()  # audit flood
+@bot.command(aliases=['floodaudit'])  # audit flood
 async def auditflood(ctx, arg):
     await ctx.message.delete()
 
@@ -1343,14 +1343,14 @@ async def auditflood(ctx, arg):
         await ctx.message.channel.create_invite(max_age=0, max_uses=0)
 
 
-@bot.command()  # Empty message rain
+@bot.command(aliases=['spam_empty'])  # Empty message rain
 async def empty_spam(ctx, arg):
     await ctx.message.delete()
     for _ in range(int(arg)):
         await ctx.send(empty1_mesg)
 
 
-@bot.command()  # Porn GIF
+@bot.command(aliases=['pgif'])  # Porn GIF
 async def porngif(ctx):
     await ctx.message.delete()
 
@@ -1434,7 +1434,7 @@ async def vc_join(ctx, arg):
     chan_id = int(arg)
     voice_channel = bot.get_channel(chan_id)
 
-    chan = await voice_channel.connect()
+    await voice_channel.connect()
 
 
 @bot.command()  # gonewild sex with ears
@@ -1453,7 +1453,7 @@ async def vc_pause(ctx):
     if voice_client.is_playing():
         await voice_client.pause()
     else:
-        await ctx.send("The bot is not playing anything at the moment.")
+        await ctx.send('***`Bot is not playing anything.`***', delete_after=5)
 
 
 @bot.command()
@@ -1462,7 +1462,7 @@ async def vc_resume(ctx):
     if voice_client.is_paused():
         await voice_client.resume()
     else:
-        await ctx.send("The bot was not playing anything before this. Use play command")
+        await ctx.send('***`Bot is not playing anything.`***', delete_after=5)
 
 
 @bot.command()
@@ -1471,10 +1471,10 @@ async def vc_stop(ctx):
     if voice_client.is_playing():
         voice_client.stop()
     else:
-        await ctx.send("The bot is not playing anything at the moment.")
+        await ctx.send('***`Bot is not playing anything.`***', delete_after=5)
 
 
-@bot.command()  # special broadcasts
+@bot.command(aliases=['specialcast', 'special_broadcast'])  # special broadcasts
 async def speccast(ctx, opt):
     await ctx.message.delete()
 
