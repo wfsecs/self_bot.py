@@ -1,7 +1,7 @@
 # self_bot.py
 ## Discord selfbot made for many purposes.
 
-**self_bot offers 102 commands and 9 categories:**
+**self_bot offers 106 commands and 9 categories:**
 
 ```
 > Basic
