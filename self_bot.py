@@ -1,4 +1,4 @@
-﻿from discord_webhook import DiscordWebhook
+from discord_webhook import DiscordWebhook
 from brainfuckery import Brainfuckery
 from modules.youtubeclass import *
 from discord.ext import commands
@@ -243,13 +243,18 @@ async def help(ctx):  # Help command
     await ctx.message.delete()
 
     sex20 = f'''[10][0;34m [Bot][0m
-[0;31m0.[0m[0;36m   quickload [1;37m(Loads the console)[0;35m,
-[0;31m1.[0m[0;36m   User:[1;37m {bot.user}[0;35m,
-[0;31m2.[0m[0;36m   Prefix:[1;37m {prefix}
-[0;31m3.[0m[0;36m   Nitro Sniper:[1;37m {sniper_status}[0;35m,
-[0;31m4.[0m[0;36m   Selfbot Catcher:[1;37m {catcher_status}[0;35m,
-[0;31m5.[0m[0;36m   Word Stalker:[1;37m {stalker_status}[0;35m,
-[0;31m6.[0m[0;36m   Mention AI:[1;37m {ai_status}[0;35m,'''
+[0;31m1.[0m[0;36m   quickload [1;37m(Loads the console)[0;35m,
+[0;31m2.[0m[0;36m   nitrosniper [0;30m<on || off> [1;37m(Loads the console)[0;35m,
+[0;31m3.[0m[0;36m   selfbotcatcher [0;30m<on || off> [1;37m(Turn selfbot-catcher on or off)[0;35m,
+[0;31m4.[0m[0;36m   wordstalker [0;30m<on || off> [1;37m(Turn Word Stalker on or off)[0;35m,
+[0;31m5.[0m[0;36m   mentionai [0;30m<on || off> [1;37m(Turn Mention AI on or off)[0;35m,
+[0;31m6.[0m[0;36m   User:[1;37m {bot.user}[0;35m,
+[0;31m7.[0m[0;36m   Prefix:[1;37m {prefix}
+
+[0;31m8.[0m[0;36m   Nitro Sniper:[1;37m {sniper_status}[0;35m,
+[0;31m9.[0m[0;36m   Selfbot Catcher:[1;37m {catcher_status}[0;35m,
+[0;31m10.[0m[0;36m  Word Stalker:[1;37m {stalker_status}[0;35m,
+[0;31m11.[0m[0;36m  Mention AI:[1;37m {ai_status}[0;35m,'''
 
     await ctx.send(f'''```ansi
     {sex1}```''')
@@ -1560,13 +1565,6 @@ async def rolemention(ctx, arg):
             await ctx.send(ping)
 
 
-@bot.command()  # test
-async def weka(ctx):
-    for word in ['WE', 'KILL', 'ANIMALS']:
-        time.sleep(1)
-        await ctx.send(word)
-
-
 @bot.command()  # id ping
 async def idping(ctx, arg):
     int(arg)
@@ -1614,6 +1612,66 @@ async def grouplock(ctx, arg):
         a = "do jackshit /shrug"
 
 
+@bot.command()  # Nitro sniper on/off
+async def nitrosniper(ctx, arg):
+    global nitro_sniper
+    global sniper_status
+
+    if arg == 'off':
+        nitro_sniper = False
+        sniper_status = 'Disabled'
+    else:
+        nitro_sniper = True
+        sniper_status = 'Active'
+
+    await quickload()
+
+
+@bot.command()  # Selfbot catcher on/off
+async def selfbotcatcher(ctx, arg):
+    global selfbot_catcher
+    global catcher_status
+
+    if arg == 'off':
+        selfbot_catcher = False
+        catcher_status = 'Disabled'
+    else:
+        selfbot_catcher = True
+        catcher_status = 'Active'
+
+    await quickload()
+
+
+@bot.command()  # Wordstalker on/off
+async def wordstalker(ctx, arg):
+    global word_stalker
+    global stalker_status
+
+    if arg == 'off':
+        word_stalker = False
+        stalker_status = 'Disabled'
+    else:
+        word_stalker = True
+        stalker_status = 'Active'
+
+    await quickload()
+
+
+@bot.command()  # Selfbot catcher on/off
+async def mentionai(ctx, arg):
+    global mention_ai
+    global ai_status
+
+    if arg == 'off':
+        mention_ai = False
+        ai_status = 'Disabled'
+    else:
+        mention_ai = True
+        ai_status = 'Active'
+
+    await quickload()
+
+
 @bot.command()  # clear console
 async def quickload(ctx):
     os.system('cls' if os.name == 'nt' else 'clear')  # cls or clear depends on os
@@ -1627,4 +1685,7 @@ async def quickload(ctx):
     print('')
 
 
-bot.run(token)
+try:
+    bot.run(token)
+except Exception as e:
+    print(f'    {flred}[ERROR] > {e}')
