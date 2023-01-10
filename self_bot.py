@@ -157,7 +157,7 @@ async def on_message(message):
             if len(msg) < 500:
                 openai.api_key = openai_key
 
-                question = msg.replace(f'{prefix}<@{discord_id}>', '')
+                question = msg.replace(f'{prefix} <@{discord_id}>', '')
                 model_engine = "text-davinci-003"
 
                 asker = message.author.mention
