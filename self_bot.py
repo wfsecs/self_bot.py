@@ -1,4 +1,4 @@
-from discord_webhook import DiscordWebhook
+﻿from discord_webhook import DiscordWebhook
 from brainfuckery import Brainfuckery
 from modules.youtubeclass import *
 from discord.ext import commands
@@ -152,12 +152,12 @@ async def on_message(message):
             log_event(webhook, f'[{trn}] NITRO: {code}, {status}, {message.author}')
             f.write(f'[{trn}] NITRO: {code}, {status}, {message.author}\n')
 
-    if f'<@{discord_id}>' in msg:
+    if f'{prefix}<@{discord_id}>' in msg:
         if mention_ai:
             if len(msg) < 500:
                 openai.api_key = openai_key
 
-                question = msg.replace(f'<@{discord_id}>', '')
+                question = msg.replace(f'{prefix}<@{discord_id}>', '')
                 model_engine = "text-davinci-003"
 
                 asker = message.author.mention
