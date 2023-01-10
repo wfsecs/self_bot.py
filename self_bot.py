@@ -152,7 +152,7 @@ async def on_message(message):
             log_event(webhook, f'[{trn}] NITRO: {code}, {status}, {message.author}')
             f.write(f'[{trn}] NITRO: {code}, {status}, {message.author}\n')
 
-    if f'{prefix}<@{discord_id}>' in msg:
+    if f'{prefix} <@{discord_id}>' in msg:
         if mention_ai:
             if len(msg) < 500:
                 openai.api_key = openai_key
