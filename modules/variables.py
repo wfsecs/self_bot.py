@@ -5,6 +5,7 @@ grouplock_group = '0'
 t_members = ''
 reslock = ''
 grouplock = False
+catreply = False
 
 sex1 = '''[1][0;34m [Basic][0m
 [0;31m1.[0m[0;36m    help [1;37m(Shows this)[0;35m,
@@ -127,6 +128,7 @@ sex8 = '''[8][0;34m [Other][0m
 [0;31m3.[0m[0;36m   kill [0;30m<user> <amount> [1;37m(Makes a webhook that bullies mentioned user)[0;35m,
 [0;31m4.[0m[0;36m   type [1;37m(Typing indicator everywhere)[0;35m,
 [0;31m5.[0m[0;36m   bsod [1;37m(Sends a link that causes BSOD on windows machines if interacted with)[0;35m,
+[0;31m6.[0m[0;36m   catreply [0;30m<on || off> [1;37m(Sends one one of those a text bubble cat when someone sends message)[0;35m,
 '''
 
 sex9 = '''[9][0;34m [Voice Channels][0m
@@ -3598,3 +3600,11 @@ ball_responses = ["As I see it, yes.", "Ask again later.", "Better not tell you 
                   "Outlook not so good.", "Outlook good.", "Reply hazy, try again.", "Signs point to yes.",
                   "Very doubtful.", "Without a doubt.",
                   "Yes.", "Yes – definitely.", "You may rely on it."]
+
+catgifs = ['https://tenor.com/view/discord-cat-bubble-gif-25359692', 'https://giant.gfycat.com/UniqueMajorHoneycreeper.mp4',
+        'https://tenor.com/view/speech-bubble-cat-talking-reply-gif-24471552', 'https://tenor.com/view/cat-speech-bubble-gif-25026388',
+        'https://tenor.com/view/cat-kitten-spilling-milk-milk-spilling-gif-25553835', 'https://tenor.com/view/cat-shaking-angry-angy-kitten-gif-25553830,',
+        'https://tenor.com/view/cat-message-bubble-gif-26400074', 'https://tenor.com/view/cat-trapped-kitten-speech-bubble-gif-25553629',
+        'https://tenor.com/view/speech-bubble-cat-gif-25478740', 'https://tenor.com/view/cat-speech-bubble-kitty-bother-bothering-gif-25862717',
+        'https://tenor.com/view/angry-cat-kitten-no-touch-speech-bubble-gif-25695629', 'https://tenor.com/view/cat-bread-speech-bubble-kitty-gif-25862716',
+        'https://tenor.com/view/cat-discord-speech-bubble-discord-user-discord-kitten-gif-25583937']
