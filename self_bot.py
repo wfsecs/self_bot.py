@@ -95,7 +95,6 @@ async def on_message_delete(message):
 @bot.listen()
 async def on_message(message):
     if catreply:
-        print('catgif reply lolol')
         if message.author != bot.user:
             await message.reply(random.choice(catgifs), mention_author=True)
 
