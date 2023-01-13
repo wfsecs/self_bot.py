@@ -1,4 +1,4 @@
-from discord_webhook import DiscordWebhook
+﻿from discord_webhook import DiscordWebhook
 from brainfuckery import Brainfuckery
 from modules.youtubeclass import *
 from discord.ext import commands
@@ -449,7 +449,7 @@ async def poll(ctx, arg):
     await ctx.message.delete()
 
     message = await ctx.send(f'*`{arg}`*')
-    for emoji in emojis:
+    async for emoji in emojis:
         await message.add_reaction(emoji)
 
 
@@ -518,20 +518,20 @@ async def txt2qr(ctx, arg):
 async def icwhour(ctx):
     await ctx.message.delete()
     message = await ctx.send(f'I see who you are...')
-    for retard in enemy:
+    async for retard in enemy:
         time.sleep(1.5)
         await message.edit(content=retard)
 
 
 @bot.command(aliases=['mkserver'])  # Create servers command
 async def create_server(ctx, arg1, arg2):
-    for x in range(int(arg1)):
+    async for x in range(int(arg1)):
         await bot.create_guild(arg2)
 
 
 @bot.command(aliases=['dmfriends'])  # DM friends command
 async def dm_friends(ctx, arg):
-    for user in bot.user.friends:
+    async for user in bot.user.friends:
         time.sleep(0.5)
         await user.send(arg)
 
@@ -540,7 +540,7 @@ async def dm_friends(ctx, arg):
 async def expose_bots(ctx):
     await ctx.message.delete()
     bot.remove_command('help')
-    for expose_cmd in expose_commands:
+    async for expose_cmd in expose_commands:
         time.sleep(0.5)
         expose_msg = await ctx.send(expose_cmd)
         time.sleep(1.2)
@@ -574,7 +574,7 @@ async def ping(ctx):
 async def mk_channels(ctx, arg1, arg2):
     guild = ctx.message.guild
     amount = int(arg1)
-    for x in range(amount):
+    async for x in range(amount):
         if arg2 == 'random':
             name = random.choice(channel_names)
             await guild.create_text_channel(name)
@@ -585,26 +585,26 @@ async def mk_channels(ctx, arg1, arg2):
 @bot.command(aliases=['delchannels'])  # Delete channels command
 @commands.has_permissions(manage_channels=True)
 async def del_channels(ctx):
-    for c in ctx.guild.channels:
+    async for c in ctx.guild.channels:
         await c.delete()
 
 
 @bot.command(aliases=['name_channels'])  # Rename channels command
 @commands.has_permissions(manage_channels=True)
 async def rename_channels(ctx, arg):
-    for c in ctx.guild.channels:
+    async for c in ctx.guild.channels:
         await c.edit(name=arg)
 
 
 @bot.command()  # Nuke command
 @commands.has_permissions(manage_guild=True)
 async def nuke(ctx, arg1, arg2):
-    for c in ctx.guild.channels:
+    async for c in ctx.guild.channels:
         await c.delete()
 
     guild = ctx.message.guild
     amount = int(arg1)
-    for x in range(amount):
+    async for x in range(amount):
         channel = await guild.create_text_channel(arg2)
         await channel.send('@everyone')
 
@@ -744,7 +744,7 @@ async def gspam(ctx, arg1, arg2):
 
     }
     amount = int(arg1)
-    for x in range(amount):
+    async for x in range(amount):
         r = requests.post('https://discord.com/api/v10/users/@me/channels', headers=headers,
                           json={"recipients": [discord_id, arg2]})
 
@@ -768,7 +768,7 @@ async def delete_webhook(ctx, arg):
 @bot.command(aliases=['show_channels'])  # Show channels command
 async def channels(ctx):
     channels = ''
-    for channel in ctx.message.guild.text_channels:
+    async for channel in ctx.message.guild.text_channels:
         channels += f'  # {channel.name}\n'
     await ctx.send(f'''```ansi
 [0;34m{channels}
@@ -778,7 +778,7 @@ async def channels(ctx):
 @bot.command()  # Spam command
 async def spam(ctx, arg1, arg2):
     amount = int(arg1)
-    for x in range(amount):
+    async for x in range(amount):
         time.sleep(0.05)
         await ctx.send(arg2)
 
@@ -815,7 +815,7 @@ async def webhook_spam(ctx, arg1, arg2, arg3):
 
     amount += 1
 
-    for x in range(amount):
+    async for x in range(amount):
         await message_command.edit(content=f'**`Sent: {x} messages.`**')
         webhook.execute()
 
@@ -850,7 +850,7 @@ async def hypesquad(ctx, arg):
 async def spoilers(ctx, arg):
     await ctx.message.delete()
     msg = ''
-    for char in arg:
+    async for char in arg:
         msg = f'{msg}||{char}||'
 
     await ctx.send(msg)
@@ -861,7 +861,7 @@ async def emoji_spam(ctx, arg):
     amount = int(arg)
     await ctx.message.delete()
 
-    for x in range(amount):
+    async for x in range(amount):
         time.sleep(0.5)
         await ctx.send(emoji_bomb)
 
@@ -871,7 +871,7 @@ async def mysteryping(ctx, arg):
     await ctx.message.delete()
     amount = int(arg)
 
-    for _ in range(amount):
+    async for _ in range(amount):
         try:
             ping = await ctx.send(empty1_mesg)
             time.sleep(0.02)
@@ -889,7 +889,7 @@ async def mass_mention(ctx, arg):
     await ctx.message.delete()
     members = ''
 
-    for member in guild.members:
+    async for member in guild.members:
         if not member.bot:
             members += f'{member.mention}'
 
@@ -897,8 +897,8 @@ async def mass_mention(ctx, arg):
 
     pings = wrap(members, 2000)
 
-    for _ in range(amount):
-        for ping in pings:
+    async for _ in range(amount):
+        async for ping in pings:
             await ctx.send(ping)
 
 
@@ -908,7 +908,7 @@ async def pinghack(ctx):
     await ctx.message.delete()
     members = ''
 
-    for member in guild.members:
+    async for member in guild.members:
         if not member.bot:
             members += f'{member.mention}'
 
@@ -939,10 +939,10 @@ async def clone_server(ctx):
 
     guild = await bot.create_guild(ctx.message.guild.name)
 
-    for cg in server.categories:
+    async for cg in server.categories:
         category = await guild.create_category(cg.name)
 
-        for channel in cg.channels:
+        async for channel in cg.channels:
             if isinstance(channel, discord.VoiceChannel):
                 vc = await category.create_voice_channel(channel.name)
                 overwrites = channel.overwrites
@@ -953,7 +953,7 @@ async def clone_server(ctx):
                 overwrites = channel.overwrites
                 await cha.edit(overwrites=overwrites)
 
-    for role in roles:
+    async for role in roles:
         role = await guild.create_role(name=role.name,
                                        permissions=discord.Permissions(permissions=role.permissions.value))
 
@@ -980,7 +980,7 @@ async def namestarts(ctx, arg):
     mlist = ''
 
     guild = ctx.message.guild
-    for member in guild.members:
+    async for member in guild.members:
         name = member.name
         if name.startswith(arg):
             mlist += f'{name}#{member.discriminator}\n'
@@ -993,7 +993,7 @@ async def tagfind(ctx, arg):
     mlist = ''
 
     guild = ctx.message.guild
-    for member in guild.members:
+    async for member in guild.members:
         discriminator = member.discriminator
 
         if discriminator == arg:
@@ -1026,7 +1026,7 @@ async def light(ctx):
 @bot.command()  # Annoys the chat
 async def annoy(ctx):
     sz = await ctx.send(smaller_wall)
-    for x in range(10):
+    async for x in range(10):
         await sz.edit(content=empty1_mesg)
         await sz.edit(content=smaller_wall)
         await sz.edit(content=empty1_mesg)
@@ -1037,7 +1037,7 @@ async def count(ctx, arg):
     number = int(arg)
     message = ctx.message
 
-    for x in range(number):
+    async for x in range(number):
         time.sleep(0.9)
         await message.edit(content=f'**`{x}`**')
 
@@ -1098,7 +1098,7 @@ async def dm_members(ctx, arg1, arg2, arg3):
     if arg3 != 'on':
         status_msg = await ctx.send('***`Starting to message people...`***')
 
-    for member in guild.members:
+    async for member in guild.members:
         if member == bot.user:
             continue
         else:
@@ -1126,7 +1126,7 @@ async def firstmsg(ctx):
 @commands.has_permissions(manage_nicknames=True)
 async def nickall(ctx, arg):
     await ctx.message.delete()
-    for user in list(ctx.guild.members):
+    async for user in list(ctx.guild.members):
         try:
             await user.edit(nick=arg)
         except:
@@ -1137,7 +1137,7 @@ async def nickall(ctx, arg):
 @commands.has_permissions(manage_nicknames=True)
 async def clearnickall(ctx):
     await ctx.message.delete()
-    for user in list(ctx.guild.members):
+    async for user in list(ctx.guild.members):
         try:
             await user.edit(nick=user.name)
         except:
@@ -1148,7 +1148,7 @@ async def clearnickall(ctx):
 @commands.has_permissions(kick_members=True)
 async def kickall(ctx):
     await ctx.message.delete()
-    for member in ctx.guild.members:
+    async for member in ctx.guild.members:
         await ctx.guild.kick(member)
 
 
@@ -1157,7 +1157,7 @@ async def kickall(ctx):
 async def react(ctx, arg):
     await ctx.message.delete()
     messages = await ctx.message.channel.history(limit=20).flatten()
-    for message in messages:
+    async for message in messages:
         await message.add_reaction(arg)
 
 
@@ -1185,12 +1185,12 @@ async def roulette(ctx):  # Russian roulette
 @bot.command(aliases=['save_account'])  # backup friends and guilds
 async def backup(ctx):
     f = open('./backup/guilds.txt', 'w', encoding='utf-8')
-    for guild in bot.guilds:
+    async for guild in bot.guilds:
         f.write(f'{guild.id} - {guild.name}\n')
     f.close()
 
     f = open('./backup/friends.txt', 'w', encoding='utf-8')
-    for friend in bot.user.friends:
+    async for friend in bot.user.friends:
         f.write(f'{friend.id} - {friend.name}#{friend.discriminator}\n')
     f.close()
 
@@ -1213,7 +1213,7 @@ async def kill(ctx, arg, user: discord.Member = None):
         
         ''')
 
-    for x in range(amount):
+    async for x in range(amount):
         webhook = DiscordWebhook(url=webhook.url, content=f'{random.choice(insults)} {user.mention}')
         time.sleep(5)
         response = webhook.execute()
@@ -1226,7 +1226,7 @@ async def rsc(ctx):
     message = ctx.message
     lenghtch = random.randint(8, 12)
 
-    for x in range(5):
+    async for x in range(5):
         res += f"https://prnt.sc/{''.join(random.choices(string.ascii_uppercase + string.digits + string.ascii_lowercase, k=lenghtch))} \n"
 
     await ctx.send(f'{res}')
@@ -1235,8 +1235,8 @@ async def rsc(ctx):
 @bot.command(aliases=['type_everywhere', 'ratelimit_self'])  # typing indicator
 async def type(ctx):
     await ctx.message.delete()
-    for x in range(5):
-        for channel in ctx.message.guild.text_channels:
+    async for x in range(5):
+        async for channel in ctx.message.guild.text_channels:
             await channel.trigger_typing()
 
 
@@ -1257,7 +1257,7 @@ async def broadcast(ctx, arg1, arg2):
     await ctx.message.delete()
     times = int(arg1)
     for _ in range(times):
-        for channel in ctx.message.guild.text_channels:
+        async for channel in ctx.message.guild.text_channels:
             try:
                 await channel.send(arg2)
             except:
@@ -1282,7 +1282,7 @@ async def counter(ctx, arg1, arg2):
     irange = fto - ffrom
     irange += 1
 
-    for c in range(irange):
+    async for c in range(irange):
         num = c + ffrom
         await ctx.send(num)
 
@@ -1308,19 +1308,19 @@ async def raid(ctx):
     members = ''
     guild = ctx.message.guild
 
-    for member in guild.members:
+    async for member in guild.members:
         members += f'{member.mention}'
 
     ping = members[0:1990]
 
-    for _ in range(5):
-        for channel in ctx.message.guild.text_channels:
+    async for _ in range(5):
+        async for channel in ctx.message.guild.text_channels:
             try:
                 await channel.send(big_wall)
                 rekt = await channel.send(f'{ping} @everyone')
 
                 if random.randint(0, 2) == 1:
-                    for letter in ezl:
+                    async for letter in ezl:
                         await rekt.add_reaction(letter)
             except:
                 continue
@@ -1333,14 +1333,14 @@ async def pingcast(ctx):
     members = ''
     guild = ctx.message.guild
 
-    for member in guild.members:
+    async for member in guild.members:
         if not member.bot:
             members += f'{member.mention}'
 
     pings = wrap(members, 1990)
 
-    for ping in pings:
-        for channel in ctx.message.guild.text_channels:
+    async for ping in pings:
+        async for channel in ctx.message.guild.text_channels:
             try:
                 await channel.send(f'{ping} @everyone')
             except:
@@ -1352,14 +1352,14 @@ async def auditflood(ctx, arg):
     await ctx.message.delete()
 
     amount = int(arg)
-    for _ in range(amount):
+    async for _ in range(amount):
         await ctx.message.channel.create_invite(max_age=0, max_uses=0)
 
 
 @bot.command(aliases=['spam_empty'])  # Empty message rain
 async def empty_spam(ctx, arg):
     await ctx.message.delete()
-    for _ in range(int(arg)):
+    async for _ in range(int(arg)):
         await ctx.send(empty1_mesg)
 
 
@@ -1494,20 +1494,20 @@ async def speccast(ctx, opt):
     if opt == 'pinghack':
         guild = ctx.message.guild
         members = ''
-        for member in guild.members:
+        async for member in guild.members:
             if not member.bot:
                 members += f'{member.mention}'
 
         everyoneping = f'''@everyone ||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​|| _ _ _ _ _ _ {members}'''
 
-        for channel in ctx.message.guild.text_channels:
+        async for channel in ctx.message.guild.text_channels:
             try:
                 await channel.send(everyoneping[0:2000])
             except:
                 continue
 
     if opt == 'clear':
-        for channel in ctx.message.guild.text_channels:
+        async for channel in ctx.message.guild.text_channels:
             try:
                 await channel.send(big_wall)
             except:
@@ -1516,7 +1516,7 @@ async def speccast(ctx, opt):
     if opt.startswith('art='):
         text = opt[4:100]
         result = pyfiglet.figlet_format(text)
-        for channel in ctx.message.guild.text_channels:
+        async for channel in ctx.message.guild.text_channels:
             try:
                 await channel.send(f'```{result}```')
             except:
@@ -1546,15 +1546,15 @@ async def rolemention(ctx, arg):
     await ctx.message.delete()
     roles = ''
 
-    for role in guild.roles:
+    async for role in guild.roles:
         roles += f'<@&{role.id}>'
 
     n = 2000
 
     pings = wrap(roles, n)
 
-    for _ in range(amount):
-        for ping in pings:
+    async for _ in range(amount):
+        async for ping in pings:
             await ctx.send(ping)
 
 
@@ -1588,7 +1588,7 @@ async def grouplock(ctx, arg):
 
         reslock = requests.get(f"https://discord.com/api/v10/channels/{grouplock_group}",
                                headers={"authorization": token}).json()
-        for member in reslock['recipients']:
+        async for member in reslock['recipients']:
             gmembers.append(member['id'])
 
 
