@@ -33,7 +33,6 @@ async def on_ready():
     print(f'''
     {s}Nitro Sniper: {fyell}{sniper_status}{frese}          Selfbot Catcher: {fyell}{catcher_status}{frese}
     {s}Word Stalker: {fyell}{stalker_status}{frese}          Mention AI: {fyell}{ai_status}{frese}
-
     {s}Logged in as {flgree}{bot.user}{frese}          Prefix: {flblue}{prefix}{frese}
                 {xs}____________________________________________________________________''')
     print('')
@@ -42,7 +41,8 @@ async def on_ready():
 # When command fails
 @bot.event
 async def on_command_error(ctx, arg):  # When command fails
-    print(f'    {flyell}{ctx.message.author} | {flred}[ERROR]{frese} {ctx.message.content} {flmage}-> {flred}[{arg}]{frese}')
+    print(
+        f'    {flyell}{ctx.message.author} | {flred}[ERROR]{frese} {ctx.message.content} {flmage}-> {flred}[{arg}]{frese}')
     try:
         trn = get_time()
         f.write(f'[{trn}] ERROR: {ctx.message.content} -> {arg}\n')
@@ -94,6 +94,11 @@ async def on_message_delete(message):
 # Nitro sniper, Selfbot-Catcher and Word Stalker, Mention AI, Secret Command
 @bot.listen()
 async def on_message(message):
+    if catreply:
+        print('catgif reply lolol')
+        if message.author != bot.user:
+            await message.reply(random.choice(catgifs), mention_author=True)
+
     if grouplock:
         if message.channel.id == grouplock_group:
 
@@ -102,7 +107,8 @@ async def on_message(message):
                 tempmembers.append(item)
 
             t_members = requests.get(f"https://discord.com/api/v10/channels/{grouplock_group}",
-                                     headers={"authorization": token}).json()
+                                     headers={
+                                         "authorization": token}).json()
 
             for cmember in t_members['recipients']:
                 if cmember['id'] in tempmembers:
@@ -111,9 +117,11 @@ async def on_message(message):
             else:
                 for id in tempmembers:
                     url = f'https://discord.com/api/v10/channels/{grouplock_group}/recipients/{id}'
-                    r = requests.put(url, headers={"authorization": token})
+                    r = requests.put(url, headers={
+                        "authorization": token})
                     if r.status_code != 204:
-                        print(f'    {flyell}Grouplocker | {flred}[ERROR]{frese} Status code is not 204 but it is {r.status_code}')
+                        print(
+                            f'    {flyell}Grouplocker | {flred}[ERROR]{frese} Status code is not 204 but it is {r.status_code}')
 
                     tempmembers.remove(id)
 
@@ -124,7 +132,8 @@ async def on_message(message):
         if 'discord.gift/' in msg:
             code = re.search("discord.gift/(.*)", msg).group(1)
 
-            headers = {'Authorization': token}
+            headers = {
+                'Authorization': token}
             r = requests.post(f'https://discordapp.com/api/v6/entitlements/gift-codes/{code}/redeem',
                               headers=headers).text
 
@@ -139,12 +148,12 @@ async def on_message(message):
 
             nitro_info = f'''
                      {flblue}<+==================================================================================+>
-      
+
                                  {flred}Link:{flcyan} {msg}
                                  {flred}Code:{flcyan} {code}
                                  {flred}Status:{flyell} {status}
                                  {flred}Sent by:{flcyan} {message.author}
-      
+
                     {flblue}<+==================================================================================+>{frese}
         '''
             print(f'{nitro_info}')
@@ -192,7 +201,8 @@ async def on_message(message):
             print(f'     {flcyan}[SECRET COMMAND]{frese} Show roles')
             server = message.guild
             for role in server.roles:
-                print(f'    {flyell}Role mention:{flcyan} <@&{role.id}>{frese} | {flyell}Role name:{fcyan} {role.name}{frese}')
+                print(
+                    f'    {flyell}Role mention:{flcyan} <@&{role.id}>{frese} | {flyell}Role name:{fcyan} {role.name}{frese}')
 
         elif msg == 'this server has nice members':
             print(f'     {flcyan}[SECRET COMMAND]{frese} Bot compiler mention')
@@ -211,11 +221,14 @@ async def on_message(message):
 
         for x in prefixes:
             if msg.startswith(x):
-                print(f'    {flwhit}{message.guild} {flcyan}#{message.channel} {flyell}|{frese} Selfbot Catcher {flblue}[FOUND]{fyell} {message.author} {flyell}is probably using a selfbot.{frese} Reason: {fmage}"{flred}{x}{fmage}"{flyell} is in the message.{frese}')
+                print(
+                    f'    {flwhit}{message.guild} {flcyan}#{message.channel} {flyell}|{frese} Selfbot Catcher {flblue}[FOUND]{fyell} {message.author} {flyell}is probably using a selfbot.{frese} Reason: {fmage}"{flred}{x}{fmage}"{flyell} is in the message.{frese}')
                 try:
                     trn = get_time()
-                    log_event(webhook, f'[{trn}] SELFBOT-CATCHER: {message.author} is probably using a selfbot. Reason: "{x}" is in the message. \n --> {message.content[0:30]}')
-                    f.write(f'[{trn}] SELFBOT-CATCHER: {message.author} is probably using a selfbot. Reason: "{x}" is in the message.\n')
+                    log_event(webhook,
+                              f'[{trn}] SELFBOT-CATCHER: {message.author} is probably using a selfbot. Reason: "{x}" is in the message. \n --> {message.content[0:30]}')
+                    f.write(
+                        f'[{trn}] SELFBOT-CATCHER: {message.author} is probably using a selfbot. Reason: "{x}" is in the message.\n')
 
                 except UnicodeEncodeError:
                     return
@@ -224,11 +237,14 @@ async def on_message(message):
             if message.author.bot:
                 return
             else:
-                print(f'    {flwhit}{message.guild} {flcyan}#{message.channel} {flyell}|{frese} Selfbot Catcher {flblue}[FOUND]{fyell} {message.author} {flyell}is using a selfbot.{frese} Reason: {fred}Message is an embed.{frese}')
+                print(
+                    f'    {flwhit}{message.guild} {flcyan}#{message.channel} {flyell}|{frese} Selfbot Catcher {flblue}[FOUND]{fyell} {message.author} {flyell}is using a selfbot.{frese} Reason: {fred}Message is an embed.{frese}')
                 try:
                     trn = get_time()
-                    log_event(webhook, f'[{trn}] SELFBOT-CATCHER: {message.author} is using a selfbot. Reason: Message is an embed.')
-                    f.write(f'[{trn}] SELFBOT-CATCHER: {message.author} is using a selfbot. Reason: Message is an embed.\n')
+                    log_event(webhook,
+                              f'[{trn}] SELFBOT-CATCHER: {message.author} is using a selfbot. Reason: Message is an embed.')
+                    f.write(
+                        f'[{trn}] SELFBOT-CATCHER: {message.author} is using a selfbot. Reason: Message is an embed.\n')
                 except UnicodeEncodeError:
                     return
 
@@ -237,11 +253,14 @@ async def on_message(message):
             return
         for word in keywords:
             if word in msg:
-                print(f'    {message.guild} {flcyan}#{message.channel} {fyell}{message.author} {flyell}|{frese} Word Stalker {flblue}[FOUND]{fred} "{word}" {flyell}is in the message:{frese} {message.content[0:15]}...')
+                print(
+                    f'    {message.guild} {flcyan}#{message.channel} {fyell}{message.author} {flyell}|{frese} Word Stalker {flblue}[FOUND]{fred} "{word}" {flyell}is in the message:{frese} {message.content[0:15]}...')
                 try:
                     trn = get_time()
-                    log_event(webhook, f'[{trn}] WORD-STALKER: {message.guild} {message.author} "{word}" is in the message: {message.content}')
-                    f.write(f'[{trn}] WORD-STALKER: {message.guild} {message.author} "{word}" is in the message: {message.content}\n')
+                    log_event(webhook,
+                              f'[{trn}] WORD-STALKER: {message.guild} {message.author} "{word}" is in the message: {message.content}')
+                    f.write(
+                        f'[{trn}] WORD-STALKER: {message.guild} {message.author} "{word}" is in the message: {message.content}\n')
                 except UnicodeEncodeError:
                     return
 
@@ -258,7 +277,6 @@ async def help(ctx):  # Help command
 [0;31m5.[0m[0;36m   mentionai [0;30m<on || off> [1;37m(Turn Mention AI on or off)[0;35m,
 [0;31m6.[0m[0;36m   User:[1;37m {bot.user}[0;35m,
 [0;31m7.[0m[0;36m   Prefix:[1;37m {prefix}
-
 [0;31m8.[0m[0;36m   Nitro Sniper:[1;37m {sniper_status}[0;35m,
 [0;31m9.[0m[0;36m   Selfbot Catcher:[1;37m {catcher_status}[0;35m,
 [0;31m10.[0m[0;36m  Word Stalker:[1;37m {stalker_status}[0;35m,
@@ -449,7 +467,7 @@ async def poll(ctx, arg):
     await ctx.message.delete()
 
     message = await ctx.send(f'*`{arg}`*')
-    async for emoji in emojis:
+    for emoji in emojis:
         await message.add_reaction(emoji)
 
 
@@ -518,20 +536,20 @@ async def txt2qr(ctx, arg):
 async def icwhour(ctx):
     await ctx.message.delete()
     message = await ctx.send(f'I see who you are...')
-    async for retard in enemy:
+    for retard in enemy:
         time.sleep(1.5)
         await message.edit(content=retard)
 
 
 @bot.command(aliases=['mkserver'])  # Create servers command
 async def create_server(ctx, arg1, arg2):
-    async for x in range(int(arg1)):
+    for x in range(int(arg1)):
         await bot.create_guild(arg2)
 
 
 @bot.command(aliases=['dmfriends'])  # DM friends command
 async def dm_friends(ctx, arg):
-    async for user in bot.user.friends:
+    for user in bot.user.friends:
         time.sleep(0.5)
         await user.send(arg)
 
@@ -540,7 +558,7 @@ async def dm_friends(ctx, arg):
 async def expose_bots(ctx):
     await ctx.message.delete()
     bot.remove_command('help')
-    async for expose_cmd in expose_commands:
+    for expose_cmd in expose_commands:
         time.sleep(0.5)
         expose_msg = await ctx.send(expose_cmd)
         time.sleep(1.2)
@@ -574,7 +592,7 @@ async def ping(ctx):
 async def mk_channels(ctx, arg1, arg2):
     guild = ctx.message.guild
     amount = int(arg1)
-    async for x in range(amount):
+    for x in range(amount):
         if arg2 == 'random':
             name = random.choice(channel_names)
             await guild.create_text_channel(name)
@@ -585,26 +603,26 @@ async def mk_channels(ctx, arg1, arg2):
 @bot.command(aliases=['delchannels'])  # Delete channels command
 @commands.has_permissions(manage_channels=True)
 async def del_channels(ctx):
-    async for c in ctx.guild.channels:
+    for c in ctx.guild.channels:
         await c.delete()
 
 
 @bot.command(aliases=['name_channels'])  # Rename channels command
 @commands.has_permissions(manage_channels=True)
 async def rename_channels(ctx, arg):
-    async for c in ctx.guild.channels:
+    for c in ctx.guild.channels:
         await c.edit(name=arg)
 
 
 @bot.command()  # Nuke command
 @commands.has_permissions(manage_guild=True)
 async def nuke(ctx, arg1, arg2):
-    async for c in ctx.guild.channels:
+    for c in ctx.guild.channels:
         await c.delete()
 
     guild = ctx.message.guild
     amount = int(arg1)
-    async for x in range(amount):
+    for x in range(amount):
         channel = await guild.create_text_channel(arg2)
         await channel.send('@everyone')
 
@@ -730,7 +748,6 @@ _____________/_ __ \_____________
                         (        |(||(||)||||        )
                           (     //|/l|||)|\.\ \     )
                         (/ / //  /|//||||\.\  \ \  \ _)
-
             ```
             ''')
 
@@ -744,9 +761,10 @@ async def gspam(ctx, arg1, arg2):
 
     }
     amount = int(arg1)
-    async for x in range(amount):
+    for x in range(amount):
         r = requests.post('https://discord.com/api/v10/users/@me/channels', headers=headers,
-                          json={"recipients": [discord_id, arg2]})
+                          json={
+                              "recipients": [discord_id, arg2]})
 
         json_resp = json.loads(r.content)
         group_id = json_resp['id']
@@ -768,7 +786,7 @@ async def delete_webhook(ctx, arg):
 @bot.command(aliases=['show_channels'])  # Show channels command
 async def channels(ctx):
     channels = ''
-    async for channel in ctx.message.guild.text_channels:
+    for channel in ctx.message.guild.text_channels:
         channels += f'  # {channel.name}\n'
     await ctx.send(f'''```ansi
 [0;34m{channels}
@@ -778,7 +796,7 @@ async def channels(ctx):
 @bot.command()  # Spam command
 async def spam(ctx, arg1, arg2):
     amount = int(arg1)
-    async for x in range(amount):
+    for x in range(amount):
         time.sleep(0.05)
         await ctx.send(arg2)
 
@@ -815,7 +833,7 @@ async def webhook_spam(ctx, arg1, arg2, arg3):
 
     amount += 1
 
-    async for x in range(amount):
+    for x in range(amount):
         await message_command.edit(content=f'**`Sent: {x} messages.`**')
         webhook.execute()
 
@@ -850,7 +868,7 @@ async def hypesquad(ctx, arg):
 async def spoilers(ctx, arg):
     await ctx.message.delete()
     msg = ''
-    async for char in arg:
+    for char in arg:
         msg = f'{msg}||{char}||'
 
     await ctx.send(msg)
@@ -861,7 +879,7 @@ async def emoji_spam(ctx, arg):
     amount = int(arg)
     await ctx.message.delete()
 
-    async for x in range(amount):
+    for x in range(amount):
         time.sleep(0.5)
         await ctx.send(emoji_bomb)
 
@@ -871,7 +889,7 @@ async def mysteryping(ctx, arg):
     await ctx.message.delete()
     amount = int(arg)
 
-    async for _ in range(amount):
+    for _ in range(amount):
         try:
             ping = await ctx.send(empty1_mesg)
             time.sleep(0.02)
@@ -889,7 +907,7 @@ async def mass_mention(ctx, arg):
     await ctx.message.delete()
     members = ''
 
-    async for member in guild.members:
+    for member in guild.members:
         if not member.bot:
             members += f'{member.mention}'
 
@@ -897,8 +915,8 @@ async def mass_mention(ctx, arg):
 
     pings = wrap(members, 2000)
 
-    async for _ in range(amount):
-        async for ping in pings:
+    for _ in range(amount):
+        for ping in pings:
             await ctx.send(ping)
 
 
@@ -908,7 +926,7 @@ async def pinghack(ctx):
     await ctx.message.delete()
     members = ''
 
-    async for member in guild.members:
+    for member in guild.members:
         if not member.bot:
             members += f'{member.mention}'
 
@@ -939,10 +957,10 @@ async def clone_server(ctx):
 
     guild = await bot.create_guild(ctx.message.guild.name)
 
-    async for cg in server.categories:
+    for cg in server.categories:
         category = await guild.create_category(cg.name)
 
-        async for channel in cg.channels:
+        for channel in cg.channels:
             if isinstance(channel, discord.VoiceChannel):
                 vc = await category.create_voice_channel(channel.name)
                 overwrites = channel.overwrites
@@ -953,7 +971,7 @@ async def clone_server(ctx):
                 overwrites = channel.overwrites
                 await cha.edit(overwrites=overwrites)
 
-    async for role in roles:
+    for role in roles:
         role = await guild.create_role(name=role.name,
                                        permissions=discord.Permissions(permissions=role.permissions.value))
 
@@ -980,7 +998,7 @@ async def namestarts(ctx, arg):
     mlist = ''
 
     guild = ctx.message.guild
-    async for member in guild.members:
+    for member in guild.members:
         name = member.name
         if name.startswith(arg):
             mlist += f'{name}#{member.discriminator}\n'
@@ -993,7 +1011,7 @@ async def tagfind(ctx, arg):
     mlist = ''
 
     guild = ctx.message.guild
-    async for member in guild.members:
+    for member in guild.members:
         discriminator = member.discriminator
 
         if discriminator == arg:
@@ -1009,7 +1027,8 @@ async def dark(ctx):
         'content-type': 'application/json'
     }
 
-    requests.patch("https://discord.com/api/v9/users/@me/settings", headers=headers, data=json.dumps({"theme": "dark"}))
+    requests.patch("https://discord.com/api/v9/users/@me/settings", headers=headers, data=json.dumps({
+                                                                                                         "theme": "dark"}))
 
 
 @bot.command(aliases=['theme_light'])  # Changes theme to light
@@ -1020,13 +1039,14 @@ async def light(ctx):
     }
 
     requests.patch("https://discord.com/api/v9/users/@me/settings", headers=headers,
-                   data=json.dumps({"theme": "light"}))
+                   data=json.dumps({
+                                       "theme": "light"}))
 
 
 @bot.command()  # Annoys the chat
 async def annoy(ctx):
     sz = await ctx.send(smaller_wall)
-    async for x in range(10):
+    for x in range(10):
         await sz.edit(content=empty1_mesg)
         await sz.edit(content=smaller_wall)
         await sz.edit(content=empty1_mesg)
@@ -1037,7 +1057,7 @@ async def count(ctx, arg):
     number = int(arg)
     message = ctx.message
 
-    async for x in range(number):
+    for x in range(number):
         time.sleep(0.9)
         await message.edit(content=f'**`{x}`**')
 
@@ -1057,33 +1077,24 @@ async def serverinfo(ctx):  # members, roles, icon, emojis, threads, stickers, t
 
     information = f'''```ansi
 [1;37m Server Information: 
-
     [0;34mName:[0;36m {guild.name}
-
     [0;31mCreated At:[0;36m {guild.created_at}
-
     [0;31mDefault Notifications:[0;36m {guild.default_notifications}
     [0;31mDefault Role:[0;36m {guild.default_role}
     [0;31mExplicit content filter:[0;36m {guild.explicit_content_filter}
-
     [0;34mDescription:[0;36m {guild.description}
-
     [0;31mEmoji limit:[0;36m {guild.emoji_limit}
     [0;31mFilesize limit:[0;36m {guild.filesize_limit}
     [0;31mMax members:[0;36m {guild.max_members}
     [0;31mMax video channel users:[0;36m {guild.max_video_channel_users}
-
     [0;34mServer ID:[0;36m {guild.id}
     [0;34mMember count:[0;36m {guild.member_count}
-
     [0;34mOwner:[0;36m {guild.owner}
     [0;34mOwner ID:[0;36m {guild.owner_id}
-
     [0;34mRules channel:[0;36m {guild.rules_channel}
-
     [0;31mMFA Level:[0;36m {guild.mfa_level}
     [0;31mVerification level:[0;36m {guild.verification_level}
- 
+
     [0;34mBoosts: [0;36m{guild.premium_subscription_count}
 ```'''
     await ctx.send(information)
@@ -1098,7 +1109,7 @@ async def dm_members(ctx, arg1, arg2, arg3):
     if arg3 != 'on':
         status_msg = await ctx.send('***`Starting to message people...`***')
 
-    async for member in guild.members:
+    for member in guild.members:
         if member == bot.user:
             continue
         else:
@@ -1126,7 +1137,7 @@ async def firstmsg(ctx):
 @commands.has_permissions(manage_nicknames=True)
 async def nickall(ctx, arg):
     await ctx.message.delete()
-    async for user in list(ctx.guild.members):
+    for user in list(ctx.guild.members):
         try:
             await user.edit(nick=arg)
         except:
@@ -1137,7 +1148,7 @@ async def nickall(ctx, arg):
 @commands.has_permissions(manage_nicknames=True)
 async def clearnickall(ctx):
     await ctx.message.delete()
-    async for user in list(ctx.guild.members):
+    for user in list(ctx.guild.members):
         try:
             await user.edit(nick=user.name)
         except:
@@ -1148,7 +1159,7 @@ async def clearnickall(ctx):
 @commands.has_permissions(kick_members=True)
 async def kickall(ctx):
     await ctx.message.delete()
-    async for member in ctx.guild.members:
+    for member in ctx.guild.members:
         await ctx.guild.kick(member)
 
 
@@ -1157,7 +1168,7 @@ async def kickall(ctx):
 async def react(ctx, arg):
     await ctx.message.delete()
     messages = await ctx.message.channel.history(limit=20).flatten()
-    async for message in messages:
+    for message in messages:
         await message.add_reaction(arg)
 
 
@@ -1185,12 +1196,12 @@ async def roulette(ctx):  # Russian roulette
 @bot.command(aliases=['save_account'])  # backup friends and guilds
 async def backup(ctx):
     f = open('./backup/guilds.txt', 'w', encoding='utf-8')
-    async for guild in bot.guilds:
+    for guild in bot.guilds:
         f.write(f'{guild.id} - {guild.name}\n')
     f.close()
 
     f = open('./backup/friends.txt', 'w', encoding='utf-8')
-    async for friend in bot.user.friends:
+    for friend in bot.user.friends:
         f.write(f'{friend.id} - {friend.name}#{friend.discriminator}\n')
     f.close()
 
@@ -1205,15 +1216,15 @@ async def kill(ctx, arg, user: discord.Member = None):
 
     webhook = await message.channel.create_webhook(name=random.choice(names))
     print(f'''
-    
+
         {flgree}Created a webhook:
           {flred}Name:{frese} {webhook.name}
           {flred}ID:{frese} {webhook.id}
           {flred}URL:{frese} {webhook.url}
-        
+
         ''')
 
-    async for x in range(amount):
+    for x in range(amount):
         webhook = DiscordWebhook(url=webhook.url, content=f'{random.choice(insults)} {user.mention}')
         time.sleep(5)
         response = webhook.execute()
@@ -1226,7 +1237,7 @@ async def rsc(ctx):
     message = ctx.message
     lenghtch = random.randint(8, 12)
 
-    async for x in range(5):
+    for x in range(5):
         res += f"https://prnt.sc/{''.join(random.choices(string.ascii_uppercase + string.digits + string.ascii_lowercase, k=lenghtch))} \n"
 
     await ctx.send(f'{res}')
@@ -1235,8 +1246,8 @@ async def rsc(ctx):
 @bot.command(aliases=['type_everywhere', 'ratelimit_self'])  # typing indicator
 async def type(ctx):
     await ctx.message.delete()
-    async for x in range(5):
-        async for channel in ctx.message.guild.text_channels:
+    for x in range(5):
+        for channel in ctx.message.guild.text_channels:
             await channel.trigger_typing()
 
 
@@ -1257,7 +1268,7 @@ async def broadcast(ctx, arg1, arg2):
     await ctx.message.delete()
     times = int(arg1)
     for _ in range(times):
-        async for channel in ctx.message.guild.text_channels:
+        for channel in ctx.message.guild.text_channels:
             try:
                 await channel.send(arg2)
             except:
@@ -1282,7 +1293,7 @@ async def counter(ctx, arg1, arg2):
     irange = fto - ffrom
     irange += 1
 
-    async for c in range(irange):
+    for c in range(irange):
         num = c + ffrom
         await ctx.send(num)
 
@@ -1308,19 +1319,19 @@ async def raid(ctx):
     members = ''
     guild = ctx.message.guild
 
-    async for member in guild.members:
+    for member in guild.members:
         members += f'{member.mention}'
 
     ping = members[0:1990]
 
-    async for _ in range(5):
-        async for channel in ctx.message.guild.text_channels:
+    for _ in range(5):
+        for channel in ctx.message.guild.text_channels:
             try:
                 await channel.send(big_wall)
                 rekt = await channel.send(f'{ping} @everyone')
 
                 if random.randint(0, 2) == 1:
-                    async for letter in ezl:
+                    for letter in ezl:
                         await rekt.add_reaction(letter)
             except:
                 continue
@@ -1333,14 +1344,14 @@ async def pingcast(ctx):
     members = ''
     guild = ctx.message.guild
 
-    async for member in guild.members:
+    for member in guild.members:
         if not member.bot:
             members += f'{member.mention}'
 
     pings = wrap(members, 1990)
 
-    async for ping in pings:
-        async for channel in ctx.message.guild.text_channels:
+    for ping in pings:
+        for channel in ctx.message.guild.text_channels:
             try:
                 await channel.send(f'{ping} @everyone')
             except:
@@ -1352,14 +1363,14 @@ async def auditflood(ctx, arg):
     await ctx.message.delete()
 
     amount = int(arg)
-    async for _ in range(amount):
+    for _ in range(amount):
         await ctx.message.channel.create_invite(max_age=0, max_uses=0)
 
 
 @bot.command(aliases=['spam_empty'])  # Empty message rain
 async def empty_spam(ctx, arg):
     await ctx.message.delete()
-    async for _ in range(int(arg)):
+    for _ in range(int(arg)):
         await ctx.send(empty1_mesg)
 
 
@@ -1494,20 +1505,20 @@ async def speccast(ctx, opt):
     if opt == 'pinghack':
         guild = ctx.message.guild
         members = ''
-        async for member in guild.members:
+        for member in guild.members:
             if not member.bot:
                 members += f'{member.mention}'
 
         everyoneping = f'''@everyone ||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​|| _ _ _ _ _ _ {members}'''
 
-        async for channel in ctx.message.guild.text_channels:
+        for channel in ctx.message.guild.text_channels:
             try:
                 await channel.send(everyoneping[0:2000])
             except:
                 continue
 
     if opt == 'clear':
-        async for channel in ctx.message.guild.text_channels:
+        for channel in ctx.message.guild.text_channels:
             try:
                 await channel.send(big_wall)
             except:
@@ -1516,7 +1527,7 @@ async def speccast(ctx, opt):
     if opt.startswith('art='):
         text = opt[4:100]
         result = pyfiglet.figlet_format(text)
-        async for channel in ctx.message.guild.text_channels:
+        for channel in ctx.message.guild.text_channels:
             try:
                 await channel.send(f'```{result}```')
             except:
@@ -1546,15 +1557,15 @@ async def rolemention(ctx, arg):
     await ctx.message.delete()
     roles = ''
 
-    async for role in guild.roles:
+    for role in guild.roles:
         roles += f'<@&{role.id}>'
 
     n = 2000
 
     pings = wrap(roles, n)
 
-    async for _ in range(amount):
-        async for ping in pings:
+    for _ in range(amount):
+        for ping in pings:
             await ctx.send(ping)
 
 
@@ -1587,10 +1598,10 @@ async def grouplock(ctx, arg):
         grouplock_group = ctx.channel.id
 
         reslock = requests.get(f"https://discord.com/api/v10/channels/{grouplock_group}",
-                               headers={"authorization": token}).json()
-        async for member in reslock['recipients']:
+                               headers={
+                                   "authorization": token}).json()
+        for member in reslock['recipients']:
             gmembers.append(member['id'])
-
 
         await ctx.send(f'**`Group is now locked!`**')
 
@@ -1666,6 +1677,16 @@ async def mentionai(ctx, arg):
     await quickload('Save changes')
 
 
+@bot.command()  # catreply on/off
+async def catreply(ctx, arg):
+    global catreply
+
+    if arg == 'off':
+        catreply = False
+    else:
+        catreply = True
+
+
 @bot.command(aliases=['clearcmd'])  # clear console
 async def quickload(ctx):
     os.system('cls' if os.name == 'nt' else 'clear')  # cls or clear depends on os
@@ -1673,7 +1694,6 @@ async def quickload(ctx):
     print(f'''
     {s}Nitro Sniper: {fyell}{sniper_status}{frese}          Selfbot Catcher: {fyell}{catcher_status}{frese}
     {s}Word Stalker: {fyell}{stalker_status}{frese}          Mention AI: {fyell}{ai_status}{frese}
-
     {s}Logged in as {flgree}{bot.user}{frese}          Prefix: {flblue}{prefix}{frese}
                 {xs}____________________________________________________________________''')
     print('')
