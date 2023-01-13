@@ -97,7 +97,10 @@ async def on_message(message):
     if catreply:
         if not message.author.bot:
             if message.author != bot.user:
-                await message.reply(random.choice(catgifs), mention_author=True)
+                try:
+                    await message.reply(random.choice(catgifs), mention_author=True)
+                except:
+                    pass
 
     if grouplock:
         if message.channel.id == grouplock_group:
