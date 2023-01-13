@@ -198,11 +198,11 @@ async def on_message(message):
             print(f'     {flcyan}[SECRET COMMAND]{frese} Bot compiler mention')
             server = message.guild
             print('--------------------------------------------')
-            print('Code: \n``')
+            print(f'Code: \n{fyell}``')
             for role in server.roles:
                 print(f'<@&{role.id}>')
             else:
-                print('# github.com/wfsecs')
+                print(f'# github.com/wfsecs{frese}')
                 print('--------------------------------------------')
 
     if selfbot_catcher:
@@ -214,7 +214,7 @@ async def on_message(message):
                 print(f'    {flwhit}{message.guild} {flcyan}#{message.channel} {flyell}|{frese} Selfbot Catcher {flblue}[FOUND]{fyell} {message.author} {flyell}is probably using a selfbot.{frese} Reason: {fmage}"{flred}{x}{fmage}"{flyell} is in the message.{frese}')
                 try:
                     trn = get_time()
-                    log_event(webhook,f'[{trn}] SELFBOT-CATCHER: {message.author} is probably using a selfbot. Reason: "{x}" is in the message. \n --> {message.content[0:30]}')
+                    log_event(webhook, f'[{trn}] SELFBOT-CATCHER: {message.author} is probably using a selfbot. Reason: "{x}" is in the message. \n --> {message.content[0:30]}')
                     f.write(f'[{trn}] SELFBOT-CATCHER: {message.author} is probably using a selfbot. Reason: "{x}" is in the message.\n')
 
                 except UnicodeEncodeError:
@@ -227,7 +227,7 @@ async def on_message(message):
                 print(f'    {flwhit}{message.guild} {flcyan}#{message.channel} {flyell}|{frese} Selfbot Catcher {flblue}[FOUND]{fyell} {message.author} {flyell}is using a selfbot.{frese} Reason: {fred}Message is an embed.{frese}')
                 try:
                     trn = get_time()
-                    log_event(webhook,f'[{trn}] SELFBOT-CATCHER: {message.author} is using a selfbot. Reason: Message is an embed.')
+                    log_event(webhook, f'[{trn}] SELFBOT-CATCHER: {message.author} is using a selfbot. Reason: Message is an embed.')
                     f.write(f'[{trn}] SELFBOT-CATCHER: {message.author} is using a selfbot. Reason: Message is an embed.\n')
                 except UnicodeEncodeError:
                     return
