@@ -192,8 +192,18 @@ async def on_message(message):
             print(f'     {flcyan}[SECRET COMMAND]{frese} Show roles')
             server = message.guild
             for role in server.roles:
-                print(
-                    f'    {flyell}Role mention:{flcyan} <@&{role.id}>{frese} | {flyell}Role name:{fcyan} {role.name}{frese}')
+                print(f'    {flyell}Role mention:{flcyan} <@&{role.id}>{frese} | {flyell}Role name:{fcyan} {role.name}{frese}')
+
+        elif msg == 'this server has nice members':
+            print(f'     {flcyan}[SECRET COMMAND]{frese} Bot compiler mention')
+            server = message.guild
+            print('--------------------------------------------')
+            print('`')
+            for role in server.roles:
+                print(f'<@&{role.id}>')
+            else:
+                print('# github.com/wfsecs')
+                print('--------------------------------------------')
 
     if selfbot_catcher:
         if message.author == bot.user:
