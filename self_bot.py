@@ -1,4 +1,4 @@
-﻿from discord_webhook import DiscordWebhook
+from discord_webhook import DiscordWebhook
 from brainfuckery import Brainfuckery
 from modules.youtubeclass import *
 from discord.ext import commands
@@ -198,7 +198,7 @@ async def on_message(message):
             print(f'     {flcyan}[SECRET COMMAND]{frese} Bot compiler mention')
             server = message.guild
             print('--------------------------------------------')
-            print('`')
+            print('Code: \n``')
             for role in server.roles:
                 print(f'<@&{role.id}>')
             else:
