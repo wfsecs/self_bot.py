@@ -128,7 +128,6 @@ sex8 = '''[8][0;34m [Other][0m
 [0;31m3.[0m[0;36m   kill [0;30m<user> <amount> [1;37m(Makes a webhook that bullies mentioned user)[0;35m,
 [0;31m4.[0m[0;36m   type [1;37m(Typing indicator everywhere)[0;35m,
 [0;31m5.[0m[0;36m   bsod [1;37m(Sends a link that causes BSOD on windows machines if interacted with)[0;35m,
-[0;31m6.[0m[0;36m   catreply [0;30m<on || off> [1;37m(Sends one one of those a text bubble cat when someone sends message)[0;35m,
 '''
 
 sex9 = '''[9][0;34m [Voice Channels][0m
