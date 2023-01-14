@@ -20,6 +20,8 @@ import time
 import json
 import os
 
+catreply = False
+
 # Bot stuff
 bot = commands.Bot(command_prefix=prefix, self_bot=True, help_command=None)
 
@@ -279,6 +281,7 @@ async def help(ctx):  # Help command
 [0;31m3.[0m[0;36m   selfbotcatcher [0;30m<on || off> [1;37m(Turn selfbot-catcher on or off)[0;35m,
 [0;31m4.[0m[0;36m   wordstalker [0;30m<on || off> [1;37m(Turn Word Stalker on or off)[0;35m,
 [0;31m5.[0m[0;36m   mentionai [0;30m<on || off> [1;37m(Turn Mention AI on or off)[0;35m,
+
 [0;31m6.[0m[0;36m   User:[1;37m {bot.user}[0;35m,
 [0;31m7.[0m[0;36m   Prefix:[1;37m {prefix}
 [0;31m8.[0m[0;36m   Nitro Sniper:[1;37m {sniper_status}[0;35m,
