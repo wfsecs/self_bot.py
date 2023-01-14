@@ -159,7 +159,7 @@ f.write('''     selfbot | Made by wfsec#6530\n+------------------=[BOT LOGS]=---
 
 # Get config.json
 with open("config.json", "r") as jsonfile:
-    cfg = json.load(jsonfile)
+    cfg = json.load(jsonfile, strict=False)
 
     token = cfg['token']
     prefix = cfg['prefix']
