@@ -20,8 +20,6 @@ import time
 import json
 import os
 
-catreply = False
-
 # Bot stuff
 bot = commands.Bot(command_prefix=prefix, self_bot=True, help_command=None)
 
@@ -97,14 +95,6 @@ async def on_message_delete(message):
 # Nitro sniper, Selfbot-Catcher and Word Stalker, Mention AI, Secret Command
 @bot.listen()
 async def on_message(message):
-    if catreply:
-        if not message.author.bot:
-            if message.author != bot.user:
-                try:
-                    await message.reply(random.choice(catgifs), mention_author=True)
-                except:
-                    pass
-
     if grouplock:
         if message.channel.id == grouplock_group:
 
@@ -1682,16 +1672,6 @@ async def mentionai(ctx, arg):
         ai_status = 'Active'
 
     await quickload('Save changes')
-
-
-@bot.command()  # catreply on/off
-async def catreply(ctx, arg):
-    global catreply
-
-    if arg == 'off':
-        catreply = False
-    else:
-        catreply = True
 
 
 @bot.command(aliases=['clearcmd'])  # clear console
