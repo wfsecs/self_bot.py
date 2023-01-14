@@ -33,6 +33,7 @@ async def on_ready():
     print(f'''
     {s}Nitro Sniper: {fyell}{sniper_status}{frese}          Selfbot Catcher: {fyell}{catcher_status}{frese}
     {s}Word Stalker: {fyell}{stalker_status}{frese}          Mention AI: {fyell}{ai_status}{frese}
+    
     {s}Logged in as {flgree}{bot.user}{frese}          Prefix: {flblue}{prefix}{frese}
                 {xs}____________________________________________________________________''')
     print('')
@@ -1697,6 +1698,7 @@ async def quickload(ctx):
     print(f'''
     {s}Nitro Sniper: {fyell}{sniper_status}{frese}          Selfbot Catcher: {fyell}{catcher_status}{frese}
     {s}Word Stalker: {fyell}{stalker_status}{frese}          Mention AI: {fyell}{ai_status}{frese}
+    
     {s}Logged in as {flgree}{bot.user}{frese}          Prefix: {flblue}{prefix}{frese}
                 {xs}____________________________________________________________________''')
     print('')
